@@ -1,0 +1,110 @@
+.tree {
+  width: 100%;
+}
+
+.tree-node {
+  position: relative;
+}
+
+.tree-node-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.tree-node-content:hover {
+  background: var(--background-hover);
+}
+
+.tree-node-content.selected {
+  background: var(--background-active);
+  color: var(--primary-color);
+}
+
+/* 展开按钮 */
+.expand-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: transform var(--transition-normal);
+}
+
+.expand-button.expanded {
+  transform: rotate(90deg);
+}
+
+/* 节点图标 */
+.node-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+}
+
+/* 节点标签 */
+.node-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 节点后缀 */
+.node-suffix {
+  margin-left: var(--spacing-sm);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* 子节点 */
+.tree-node-children {
+  position: relative;
+}
+
+/* 目录树样式 */
+.directory-tree .tree-node-content {
+  border-radius: var(--radius-sm);
+}
+
+.directory-tree .tree-node-children::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 29px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-color);
+}
+
+.directory-tree .node-icon {
+  color: var(--text-secondary);
+}
+
+.directory-tree .selected .node-icon {
+  color: var(--primary-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .tree-node-content {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .expand-button,
+  .node-icon {
+    width: 16px;
+    height: 16px;
+  }
+} 

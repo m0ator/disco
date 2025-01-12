@@ -1,0 +1,78 @@
+.accordion {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--background-white);
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-normal);
+}
+
+.accordion-header:hover {
+  background: var(--background-hover);
+}
+
+.header-content {
+  flex: 1;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.header-icon {
+  color: var(--text-secondary);
+  transition: transform var(--transition-normal);
+}
+
+.header-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: height var(--transition-normal);
+}
+
+.content-inner {
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+/* 手风琴组样式 */
+.accordion-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.accordion-group .accordion {
+  margin: 0;
+}
+
+/* 动画效果 */
+.accordion.expanded {
+  background: var(--background-light);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .accordion-header {
+    padding: var(--spacing-md);
+  }
+
+  .content-inner {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+} 

@@ -1,0 +1,118 @@
+.skeleton {
+  background: var(--background-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 变体样式 */
+.skeleton-text {
+  height: 16px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.skeleton-text:last-child {
+  width: 80%;
+  margin-bottom: 0;
+}
+
+.skeleton-avatar {
+  border-radius: 50%;
+}
+
+.skeleton-image {
+  border-radius: var(--radius-lg);
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+/* 动画效果 */
+.skeleton-pulse {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-wave {
+  overflow: hidden;
+}
+
+.skeleton-wave::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: skeleton-wave 1.5s ease-in-out infinite;
+}
+
+/* 组合骨架屏 */
+.skeleton-card {
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-card-content {
+  padding: var(--spacing-lg);
+}
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.skeleton-list-item {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-list-content {
+  flex: 1;
+}
+
+/* 动画关键帧 */
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes skeleton-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%, 100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .skeleton-card-content {
+    padding: var(--spacing-md);
+  }
+
+  .skeleton-list-item {
+    padding: var(--spacing-sm);
+  }
+} 

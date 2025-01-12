@@ -1,0 +1,30 @@
+.section {
+  position: relative;
+  width: 100%;
+}
+
+.section-light {
+  background-color: var(--background-light);
+}
+
+.section-dark {
+  background-color: var(--text-primary);
+  color: var(--text-white);
+}
+
+.section-primary {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+.section-spacing-default {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section-spacing-large {
+  padding: var(--spacing-3xl) 0;
+}
+
+.section-spacing-small {
+  padding: var(--spacing-xl) 0;
+} 

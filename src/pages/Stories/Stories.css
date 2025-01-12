@@ -1,0 +1,241 @@
+.stories-page {
+  padding-top: var(--header-height);
+}
+
+/* Hero Section */
+.hero-section {
+  background: var(--primary-gradient);
+  color: var(--text-white);
+  padding: var(--spacing-4xl) 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-xl);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-hero-subtitle);
+}
+
+/* Categories Section */
+.categories-section {
+  padding: var(--spacing-2xl) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.categories-list {
+  display: flex;
+  gap: var(--spacing-md);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-sm);
+}
+
+.category-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  white-space: nowrap;
+}
+
+/* Featured Story */
+.featured-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--background-light);
+}
+
+.featured-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.featured-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.featured-story:hover .featured-image img {
+  transform: scale(1.05);
+}
+
+.featured-content {
+  padding: var(--spacing-xl);
+}
+
+.featured-title {
+  font-size: var(--font-size-3xl);
+  margin: var(--spacing-md) 0;
+}
+
+.featured-description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+/* Stories Grid */
+.stories-section {
+  padding: var(--spacing-4xl) 0;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.story-card {
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-normal);
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.story-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.story-card:hover .story-image img {
+  transform: scale(1.05);
+}
+
+.story-category {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  background: var(--primary-color);
+  color: var(--text-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+}
+
+.story-content {
+  padding: var(--spacing-lg);
+}
+
+.story-title {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.story-description {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.story-date {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.stories-load-more {
+  text-align: center;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--background-light);
+}
+
+.newsletter-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-description {
+  color: var(--text-secondary);
+  margin: var(--spacing-md) 0 var(--spacing-xl);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured-story {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .featured-content {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .featured-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .featured-description {
+    font-size: var(--font-size-base);
+  }
+} 

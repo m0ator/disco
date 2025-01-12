@@ -1,0 +1,42 @@
+.rating {
+  display: inline-flex;
+  gap: var(--spacing-xs);
+}
+
+.rating-item {
+  display: inline-flex;
+  cursor: pointer;
+  color: var(--warning-color);
+}
+
+/* 尺寸变体 */
+.rating-sm .rating-icon {
+  font-size: 16px;
+}
+
+.rating-md .rating-icon {
+  font-size: 24px;
+}
+
+.rating-lg .rating-icon {
+  font-size: 32px;
+}
+
+/* 禁用状态 */
+.rating-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* 动画效果 */
+.rating-item {
+  transition: transform var(--transition-normal);
+}
+
+.rating-item:hover {
+  transform: scale(1.2);
+}
+
+.rating-disabled .rating-item:hover {
+  transform: none;
+} 

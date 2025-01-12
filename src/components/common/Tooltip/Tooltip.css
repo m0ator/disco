@@ -1,0 +1,69 @@
+.tooltip-trigger {
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: var(--z-tooltip);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--background-dark);
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  max-width: 300px;
+  pointer-events: none;
+  animation: tooltip-in 0.2s ease forwards;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  transform: rotate(45deg);
+}
+
+/* Placement variants */
+.tooltip-top::before {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+.tooltip-bottom::before {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+.tooltip-left::before {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.tooltip-right::before {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+@keyframes tooltip-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .tooltip {
+    display: none;
+  }
+} 

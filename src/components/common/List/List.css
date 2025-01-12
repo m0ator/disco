@@ -1,0 +1,155 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+}
+
+.list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  transition: background var(--transition-normal);
+}
+
+/* 尺寸变体 */
+.list-sm .list-item {
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.list-lg .list-item {
+  padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+/* 样式变体 */
+.list-outlined {
+  border: 1px solid var(--border-color);
+}
+
+.list-elevated {
+  box-shadow: var(--shadow-sm);
+}
+
+/* 交互状态 */
+.list-item.clickable {
+  cursor: pointer;
+}
+
+.list-item.clickable:hover {
+  background: var(--background-hover);
+}
+
+/* 内部元素 */
+.list-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.list-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.list-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.list-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.list-primary {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-xs);
+}
+
+.list-secondary {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.list-action {
+  margin-left: var(--spacing-md);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.list-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* 列表组样式 */
+.list-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.list-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.list-group-header.collapsible {
+  cursor: pointer;
+}
+
+.group-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.group-icon {
+  color: var(--text-secondary);
+  transition: transform var(--transition-normal);
+}
+
+.group-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.list-group-content {
+  overflow: hidden;
+  transition: height var(--transition-normal);
+}
+
+.list-group-content:not(.expanded) {
+  height: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .list-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .list-avatar,
+  .list-icon {
+    width: 32px;
+    height: 32px;
+  }
+} 

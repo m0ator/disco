@@ -1,0 +1,95 @@
+:root {
+  /* 检查是否缺少必要的变量 */
+  --header-height: 64px;
+  --max-width: 1200px;
+  
+  /* 间距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 80px;
+  --spacing-5xl: 120px;
+
+  /* 主色调 - 基于 Google 品牌色 */
+  --primary-color: #4285f4;  /* Google 蓝 */
+  --primary-light: rgba(66, 133, 244, 0.1);
+  --primary-dark: #1a73e8;   /* 深蓝，用于悬停状态 */
+  
+  /* 辅助色 */
+  --red: #ea4335;      /* Google 红 */
+  --yellow: #fbbc04;   /* Google 黄 */
+  --green: #34a853;    /* Google 绿 */
+  
+  /* 背景色 */
+  --background-white: #ffffff;
+  --background-light: #f8f9fa;
+  --background-subtle: #f1f3f4;
+  --background-dark: #202124;
+  
+  /* 渐变色 */
+  --primary-gradient: linear-gradient(145deg, #ffffff, #f8f9fa);  /* 改为白色渐变 */
+  --surface-gradient: linear-gradient(145deg, #ffffff, #f8f9fa);
+  --dark-gradient: linear-gradient(145deg, #202124, #303134);
+  
+  /* 文本颜色 */
+  --text-primary: #202124;   /* 主要文本 */
+  --text-secondary: #5f6368; /* 次要文本 */
+  --text-tertiary: #80868b;  /* 辅助文本 */
+  --text-white: #ffffff;
+  --text-link: #1a73e8;      /* 链接文本 */
+  --text-hero-subtitle: var(--text-secondary);  /* 添加专门的 hero 副标题颜色变量 */
+  
+  /* 边框和分割线 */
+  --border-color: #dadce0;
+  --border-subtle: #f1f3f4;
+  
+  /* 状态颜色 */
+  --success-color: #34a853;  /* 成功状态 */
+  --error-color: #ea4335;    /* 错误状态 */
+  --warning-color: #fbbc04;  /* 警告状态 */
+  --info-color: #4285f4;     /* 信息状态 */
+  
+  /* 阴影 - 更新为 Google Material Design 风格 */
+  --shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 
+               0 1px 3px 1px rgba(60, 64, 67, 0.08);
+  --shadow-md: 0 2px 4px -1px rgba(60, 64, 67, 0.1), 
+               0 4px 6px -1px rgba(60, 64, 67, 0.08);
+  --shadow-lg: 0 8px 12px -4px rgba(60, 64, 67, 0.1),
+               0 12px 16px -4px rgba(60, 64, 67, 0.08);
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* 字体大小 */
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 40px;
+  --font-size-4xl: 48px;
+  --font-size-5xl: 56px;
+
+  /* 字重 */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* 过渡 */
+  --transition-normal: 0.3s ease;
+
+  /* z-index */
+  --z-index-header: 1000;
+
+  /* 社交媒体颜色 */
+  --weibo-color: #e6162d;
+  --wechat-color: #07c160;
+  --zhihu-color: #0084ff;
+  --tiktok-color: #000000;
+} 

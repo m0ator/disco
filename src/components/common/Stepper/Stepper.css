@@ -1,0 +1,159 @@
+.stepper {
+  display: flex;
+  width: 100%;
+}
+
+/* 水平布局 */
+.stepper-horizontal {
+  flex-direction: row;
+}
+
+.stepper-horizontal .step {
+  flex: 1;
+  position: relative;
+  padding-bottom: var(--spacing-xl);
+}
+
+.stepper-horizontal .step-connector {
+  position: absolute;
+  top: 24px;
+  left: calc(50% + 24px);
+  right: calc(-50% + 24px);
+  height: 1px;
+}
+
+.stepper-horizontal .connector-line {
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid var(--border-color);
+  transition: border-color var(--transition-normal);
+}
+
+.stepper-horizontal .step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 垂直布局 */
+.stepper-vertical {
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.stepper-vertical .step {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.stepper-vertical .step-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.stepper-vertical .connector-line {
+  flex: 1;
+  width: 2px;
+  background: var(--border-color);
+  transition: background var(--transition-normal);
+}
+
+.stepper-vertical .step-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+/* 步骤指示器 */
+.step-indicator {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--background-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-sm);
+  transition: all var(--transition-normal);
+}
+
+.step-number {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.step-icon {
+  color: var(--text-white);
+  font-size: 18px;
+}
+
+/* 步骤标签 */
+.step-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.step-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* 状态样式 */
+.step-completed .step-indicator {
+  background: var(--success-color);
+}
+
+.step-completed .connector-line {
+  border-color: var(--success-color);
+  background: var(--success-color);
+}
+
+.step-active .step-indicator {
+  background: var(--primary-color);
+}
+
+.step-active .step-number {
+  color: var(--text-white);
+}
+
+/* 变体样式 */
+.stepper-outlined .step-indicator {
+  border: 2px solid var(--border-color);
+  background: transparent;
+}
+
+.stepper-outlined .step-completed .step-indicator,
+.stepper-outlined .step-active .step-indicator {
+  border-color: currentColor;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .stepper-horizontal {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .stepper-horizontal .step {
+    padding-bottom: 0;
+  }
+
+  .stepper-horizontal .step-connector {
+    display: none;
+  }
+
+  .stepper-horizontal .step-content {
+    flex-direction: row;
+    text-align: left;
+    gap: var(--spacing-md);
+  }
+
+  .stepper-horizontal .step-indicator {
+    margin-bottom: 0;
+  }
+} 

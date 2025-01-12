@@ -1,0 +1,97 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-list {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-xl);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tab-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab-selected {
+  color: var(--primary-color);
+}
+
+.tab-selected::after {
+  transform: scaleX(1);
+}
+
+/* 变体样式 */
+.tabs-underline .tab-list {
+  border-bottom: none;
+}
+
+.tabs-underline .tab {
+  border-bottom: 2px solid transparent;
+}
+
+.tabs-underline .tab-selected {
+  border-bottom-color: var(--primary-color);
+}
+
+.tabs-contained .tab-list {
+  background: var(--background-light);
+  border-radius: var(--radius-full);
+  padding: var(--spacing-xs);
+  border: none;
+}
+
+.tabs-contained .tab {
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.tabs-contained .tab-selected {
+  background: var(--background-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+} 

@@ -1,0 +1,87 @@
+.popover-trigger {
+  display: inline-block;
+}
+
+.popover {
+  position: absolute;
+  z-index: var(--z-popover);
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  max-width: 400px;
+  animation: popover-in 0.2s ease forwards;
+}
+
+.popover::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  transform: rotate(45deg);
+  box-shadow: var(--shadow-sm);
+}
+
+.popover-content {
+  position: relative;
+  padding: var(--spacing-md);
+  background: inherit;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* Placement variants */
+.popover-top::before {
+  bottom: -6px;
+  left: 50%;
+  margin-left: -6px;
+}
+
+.popover-bottom::before {
+  top: -6px;
+  left: 50%;
+  margin-left: -6px;
+}
+
+.popover-left::before {
+  right: -6px;
+  top: 50%;
+  margin-top: -6px;
+}
+
+.popover-right::before {
+  left: -6px;
+  top: 50%;
+  margin-top: -6px;
+}
+
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .popover {
+    position: fixed;
+    top: auto !important;
+    bottom: 0;
+    left: 0 !important;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transform-origin: bottom center;
+  }
+
+  .popover::before {
+    display: none;
+  }
+} 

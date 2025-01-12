@@ -1,0 +1,77 @@
+.badge-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  color: var(--text-white);
+  transform: translate(50%, -50%);
+  transform-origin: 100% 0%;
+  z-index: 1;
+}
+
+.badge-dot {
+  min-width: 8px;
+  height: 8px;
+  padding: 0;
+}
+
+/* 位置变体 */
+.badge-right.badge-top .badge {
+  top: 0;
+  right: 0;
+}
+
+.badge-left.badge-top .badge {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  transform-origin: 0% 0%;
+}
+
+.badge-right.badge-bottom .badge {
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+  transform-origin: 100% 100%;
+}
+
+.badge-left.badge-bottom .badge {
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+  transform-origin: 0% 100%;
+}
+
+/* 重叠样式 */
+.badge-overlap .badge {
+  top: 16%;
+  right: 16%;
+}
+
+/* 颜色变体 */
+.badge-primary { background: var(--primary-color); }
+.badge-secondary { background: var(--secondary-color); }
+.badge-success { background: var(--success-color); }
+.badge-error { background: var(--error-color); }
+
+/* 样式变体 */
+.badge-outlined {
+  background: transparent;
+  border: 1.5px solid currentColor;
+}
+
+.badge-outlined.badge-primary { color: var(--primary-color); }
+.badge-outlined.badge-secondary { color: var(--secondary-color); }
+.badge-outlined.badge-success { color: var(--success-color); }
+.badge-outlined.badge-error { color: var(--error-color); } 

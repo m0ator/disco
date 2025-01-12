@@ -1,0 +1,131 @@
+.gallery {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.gallery-columns-2 { grid-template-columns: repeat(2, 1fr); }
+.gallery-columns-3 { grid-template-columns: repeat(3, 1fr); }
+.gallery-columns-4 { grid-template-columns: repeat(4, 1fr); }
+
+.gallery-gap-sm { gap: var(--spacing-sm); }
+.gallery-gap-md { gap: var(--spacing-md); }
+.gallery-gap-lg { gap: var(--spacing-lg); }
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-normal);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-md);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: var(--text-white);
+}
+
+/* Image Viewer */
+.image-viewer-modal {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.image-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.viewer-image {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.viewer-caption {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--text-white);
+}
+
+.viewer-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  color: var(--text-white);
+  cursor: pointer;
+  z-index: 1;
+  padding: var(--spacing-sm);
+}
+
+.viewer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-white);
+  cursor: pointer;
+  padding: var(--spacing-md);
+  transition: all var(--transition-normal);
+}
+
+.viewer-prev { left: var(--spacing-md); }
+.viewer-next { right: var(--spacing-md); }
+
+.viewer-nav:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.viewer-counter {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .gallery-columns-3,
+  .gallery-columns-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+} 

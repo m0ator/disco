@@ -1,0 +1,95 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 表头样式 */
+.table thead {
+  background: var(--background-light);
+}
+
+.table th {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* 表格内容 */
+.table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table tbody tr {
+  transition: background var(--transition-normal);
+}
+
+.table tbody tr:hover {
+  background: var(--background-hover);
+}
+
+/* 对齐方式 */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* 排序功能 */
+.sortable {
+  cursor: pointer;
+}
+
+.sort-icon {
+  color: var(--text-tertiary);
+  font-size: 18px;
+  transition: transform var(--transition-normal);
+}
+
+.sortable:hover .sort-icon {
+  color: var(--text-secondary);
+}
+
+/* 选择功能 */
+.table-checkbox {
+  width: 48px;
+  text-align: center;
+}
+
+.table-checkbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.table tr.selected {
+  background: var(--background-active);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .table-checkbox {
+    width: 40px;
+  }
+} 

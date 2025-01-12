@@ -1,0 +1,143 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-normal);
+  max-width: 100%;
+}
+
+/* 尺寸变体 */
+.chip-sm {
+  height: 24px;
+  padding: 0 var(--spacing-sm);
+}
+
+.chip-md {
+  height: 32px;
+  padding: 0 var(--spacing-md);
+}
+
+.chip-lg {
+  height: 40px;
+  padding: 0 var(--spacing-lg);
+}
+
+/* 样式变体 */
+.chip-default {
+  background: var(--background-light);
+  color: var(--text-primary);
+}
+
+.chip-outlined {
+  background: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.chip-filled {
+  background: var(--primary-color);
+  color: var(--text-white);
+}
+
+/* 颜色变体 */
+.chip-primary {
+  color: var(--primary-color);
+}
+
+.chip-primary.chip-filled {
+  background: var(--primary-color);
+  color: var(--text-white);
+}
+
+.chip-primary.chip-outlined {
+  border-color: var(--primary-color);
+}
+
+.chip-success {
+  color: var(--success-color);
+}
+
+.chip-success.chip-filled {
+  background: var(--success-color);
+  color: var(--text-white);
+}
+
+.chip-success.chip-outlined {
+  border-color: var(--success-color);
+}
+
+.chip-error {
+  color: var(--error-color);
+}
+
+.chip-error.chip-filled {
+  background: var(--error-color);
+  color: var(--text-white);
+}
+
+.chip-error.chip-outlined {
+  border-color: var(--error-color);
+}
+
+/* 交互状态 */
+.chip-clickable {
+  cursor: pointer;
+}
+
+.chip-clickable:hover {
+  background: var(--background-hover);
+}
+
+.chip-selected {
+  background: var(--background-active);
+}
+
+/* 内部元素 */
+.chip-avatar {
+  width: 24px;
+  height: 24px;
+  margin-left: -8px;
+}
+
+.chip-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chip-icon {
+  font-size: 18px;
+}
+
+.chip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chip-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin-right: -4px;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition-normal);
+}
+
+.chip-delete:hover {
+  opacity: 1;
+}
+
+/* 组样式 */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+} 

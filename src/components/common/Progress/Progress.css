@@ -1,0 +1,141 @@
+/* 基础进度条样式 */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.progress-bar {
+  flex: 1;
+  background: var(--background-light);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-value {
+  height: 100%;
+  background: currentColor;
+  border-radius: inherit;
+  transition: width var(--transition-normal);
+}
+
+/* 尺寸变体 */
+.progress-sm { height: 4px; }
+.progress-md { height: 8px; }
+.progress-lg { height: 12px; }
+
+/* 颜色变体 */
+.progress-primary { color: var(--primary-color); }
+.progress-secondary { color: var(--secondary-color); }
+.progress-success { color: var(--success-color); }
+.progress-error { color: var(--error-color); }
+
+/* 标签样式 */
+.progress-label {
+  min-width: 44px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* 动画效果 */
+.progress-animated .progress-value {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-animated .progress-value::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: progress-shine 1.5s infinite;
+}
+
+/* 环形进度条样式 */
+.circular-progress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular-progress svg {
+  transform: rotate(-90deg);
+}
+
+.circular-background {
+  fill: none;
+  stroke: var(--background-light);
+}
+
+.circular-value {
+  fill: none;
+  stroke: currentColor;
+  transition: stroke-dashoffset var(--transition-normal);
+}
+
+.circular-primary { color: var(--primary-color); }
+.circular-secondary { color: var(--secondary-color); }
+.circular-success { color: var(--success-color); }
+.circular-error { color: var(--error-color); }
+
+.circular-label {
+  position: absolute;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* 线性加载样式 */
+.linear-progress {
+  width: 100%;
+  overflow: hidden;
+  background: var(--background-light);
+  border-radius: var(--radius-full);
+}
+
+.linear-value {
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  animation: linear-loading 2s infinite;
+}
+
+.linear-sm { height: 2px; }
+.linear-md { height: 4px; }
+.linear-lg { height: 6px; }
+
+.linear-primary { color: var(--primary-color); }
+.linear-secondary { color: var(--secondary-color); }
+.linear-success { color: var(--success-color); }
+.linear-error { color: var(--error-color); }
+
+/* 动画关键帧 */
+@keyframes progress-shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes linear-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+} 

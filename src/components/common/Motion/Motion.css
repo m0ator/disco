@@ -1,0 +1,70 @@
+.motion {
+  opacity: 0;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: var(--motion-delay, 0ms);
+}
+
+/* Durations */
+.duration-fast { transition-duration: var(--transition-fast); }
+.duration-normal { transition-duration: var(--transition-normal); }
+.duration-slow { transition-duration: var(--transition-slow); }
+
+/* Animations */
+.motion-fade {
+  opacity: 0;
+}
+
+.motion-fade.is-visible {
+  opacity: 1;
+}
+
+.motion-slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.motion-slide-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-slide-down {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.motion-slide-down.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-slide-left {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.motion-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.motion-slide-right {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.motion-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.motion-scale {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.motion-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+} 

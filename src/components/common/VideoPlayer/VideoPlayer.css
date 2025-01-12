@@ -1,0 +1,157 @@
+.video-player {
+  position: relative;
+  width: 100%;
+  background: var(--background-dark);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.video-player video {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: var(--spacing-md);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.video-player:hover .video-controls {
+  opacity: 1;
+}
+
+.video-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  margin-bottom: var(--spacing-sm);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: inherit;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.video-progress:hover .progress-bar::after {
+  opacity: 1;
+}
+
+.controls-main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.control-button {
+  background: none;
+  border: none;
+  color: var(--text-white);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+}
+
+.control-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.time-display {
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+  min-width: 100px;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-white);
+}
+
+.volume-slider {
+  width: 80px;
+  height: 4px;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--text-white);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.video-title {
+  margin-left: auto;
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  color: var(--text-white);
+  font-size: 64px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all var(--transition-normal);
+}
+
+.play-overlay:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .video-controls {
+    padding: var(--spacing-sm);
+  }
+
+  .time-display {
+    display: none;
+  }
+
+  .volume-control {
+    display: none;
+  }
+
+  .video-title {
+    display: none;
+  }
+} 

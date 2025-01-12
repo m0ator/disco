@@ -1,0 +1,36 @@
+.back-top {
+  position: fixed;
+  right: var(--spacing-xl);
+  bottom: var(--spacing-xl);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--background-white);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  z-index: var(--z-index-backtop);
+  opacity: 0.8;
+}
+
+.back-top:hover {
+  opacity: 1;
+  transform: translateY(-4px);
+  background: var(--background-hover);
+  color: var(--primary-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .back-top {
+    right: var(--spacing-md);
+    bottom: var(--spacing-md);
+    width: 36px;
+    height: 36px;
+  }
+} 
