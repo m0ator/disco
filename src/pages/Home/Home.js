@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import { 
   Section,
   Container,
@@ -10,15 +12,258 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanel,
   Progress
 } from '../../components/common';
+import { Carousel } from '../../components/common/Carousel';
 import './Home.css';
 
 const Home = () => {
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeServiceTab, setActiveServiceTab] = useState(0);
+
+  const handleTabChange = (index) => {
+    setActiveTab(index);
+  };
+
+  const solutions = {
+    it: [
+      {
+        title: '网络运维',
+        description: '提供企业级网络基础设施的全面管理与维护，确保网络安全、稳定和高效运行。',
+        icon: 'lan',
+        features: [
+          '网络架构规划',
+          '性能监控分析',
+          '故障诊断处理',
+          '安全策略优化'
+        ]
+      },
+      {
+        title: '系统运维',
+        description: '为企业服务器和系统提供全方位的运维服务，实现业务的持续稳定运行。',
+        icon: 'computer',
+        features: [
+          '系统部署管理',
+          '性能调优服务',
+          '补丁更新维护',
+          '容灾备份方案'
+        ]
+      },
+      {
+        title: '安全运维',
+        description: '构建全方位的网络安全防护体系，保障企业数据和业务的安全。',
+        icon: 'security',
+        features: [
+          '安全审计评估',
+          '漏洞检测修复',
+          '防火墙配置',
+          '入侵检测防御'
+        ]
+      },
+      {
+        title: '数据运维',
+        description: '专业的数据管理和维护服务，确保企业数据的安全性、完整性和可用性。',
+        icon: 'backup',
+        features: [
+          '数据备份恢复',
+          '数据迁移服务',
+          '存储优化方案',
+          '容灾保护体系'
+        ]
+      }
+    ],
+    smart: [
+      {
+        title: '智能办公',
+        description: '打造现代化的智能办公环境，提升企业协作效率和工作体验。',
+        icon: 'business',
+        features: [
+          '协同办公平台',
+          '智能会议系统',
+          '文档自动化',
+          '工作流程优化'
+        ]
+      },
+      {
+        title: '智慧工厂',
+        description: '通过物联网和自动化技术，实现工厂生产的智能化管理和控制。',
+        icon: 'precision_manufacturing',
+        features: [
+          '生产线自动化',
+          '设备智能监控',
+          '质量控制系统',
+          '能源管理优化'
+        ]
+      },
+      {
+        title: '数据分析',
+        description: '利用先进的数据分析技术，助力企业实现数据驱动的决策和运营。',
+        icon: 'analytics',
+        features: [
+          '商业智能分析',
+          '预测性分析',
+          '可视化报表',
+          '决策支持系统'
+        ]
+      },
+      {
+        title: 'AI应用',
+        description: '为企业提供定制化的人工智能解决方案，提升业务智能化水平。',
+        icon: 'psychology',
+        features: [
+          '机器学习应用',
+          '智能客服系统',
+          '图像识别处理',
+          '自然语言处理'
+        ]
+      }
+    ],
+    maintenance: [
+      {
+        title: '硬件维修',
+        description: '专业的电脑及周边设备维修服务，快速解决各类硬件故障问题。',
+        icon: 'build',
+        features: [
+          '电脑主机维修',
+          '显示器维修',
+          '打印机维修',
+          '配件更换服务'
+        ]
+      },
+      {
+        title: '软件维护',
+        description: '全面的软件维护和升级服务，确保系统稳定运行和功能优化。',
+        icon: 'settings_suggest',
+        features: [
+          '系统优化加速',
+          '软件故障修复',
+          '病毒木马清除',
+          '数据恢复服务'
+        ]
+      },
+      {
+        title: '网络维修',
+        description: '专业的网络设备检修和优化服务，解决各类网络连接问题。',
+        icon: 'router',
+        features: [
+          '网络故障排查',
+          '设备检修维护',
+          '网络性能优化',
+          '布线系统维护'
+        ]
+      },
+      {
+        title: '应急响应',
+        description: '7x24小时快速响应服务，第一时间处理紧急故障问题。',
+        icon: 'emergency',
+        features: [
+          '远程技术支持',
+          '现场紧急处理',
+          '备用设备支持',
+          '应急方案制定'
+        ]
+      }
+    ],
+    equipment: [
+      {
+        title: '办公设备',
+        description: '提供高品质的办公设备采购服务，满足企业办公需求。',
+        icon: 'desktop_windows',
+        features: [
+          '电脑整机采购',
+          '打印设备选型',
+          '显示器配置',
+          '外设产品推荐'
+        ]
+      },
+      {
+        title: '网络设备',
+        description: '专业的网络设备采购解决方案，构建高效稳定的网络环境。',
+        icon: 'wifi',
+        features: [
+          '路由器选型',
+          '交换机配置',
+          '防火墙部署',
+          '网络存储方案'
+        ]
+      },
+      {
+        title: '安防设备',
+        description: '全方位的安防监控设备采购，保障企业安全管理需求。',
+        icon: 'camera_outdoor',
+        features: [
+          '监控系统选型',
+          '门禁系统配置',
+          '报警设备部署',
+          '联动系统方案'
+        ]
+      },
+      {
+        title: '智能设备',
+        description: '创新的智能办公设备采购，提升企业智能化办公水平。',
+        icon: 'devices',
+        features: [
+          '智能会议设备',
+          '协作显示系统',
+          '考勤门禁设备',
+          '环境监测设备'
+        ]
+      }
+    ]
+  };
+
+  const solutionTabs = [
+    { title: '企业IT运维服务', data: solutions.it },
+    { title: '智能化解决方案', data: solutions.smart },
+    { title: '维修服务', data: solutions.maintenance },
+    { title: '设备采购', data: solutions.equipment }
+  ];
+
+  const carouselImages = [
+    {
+      url: 'https://www.microswift.top/halo/12/bahtnvgk.jpg',
+      alt: '联想电脑整体解决方案',
+      title: '联想电脑整体解决方案',
+      subtitle: '为企业或个人提供一站式IT解决方案',
+      description: '从硬件选型到软件部署，从运维服务到技术支持，我们提供全方位的企业级IT服务。'
+    },
+    {
+      url: 'https://www.microswift.top/halo/12/txrnnljt.png',
+      alt: '多品牌产品技术服务',
+      title: '多品牌产品技术服务',
+      subtitle: '引领商务办公新潮流',
+      description: '便捷、高效的查收、体验微讯云技术服务'
+    },
+    {
+      url: 'https://www.microswift.top/halo/12/cticyhkg.jpg',
+      alt: '电脑硬件升级服务',
+      title: '整机体检方案',
+      subtitle: '整机体检方案',
+      description: '我们会对整机进行评测，给出最优的升级方案。'
+    },
+    {
+      url: 'https://www.microswift.top/halo/12/wypqaujd.jpg',
+      alt: 'IT运维管理咨询',
+      title: 'IT运维管理咨询',
+      subtitle: '专业可靠的企业级选择',
+      description: '以客户业务为目标导向的IT服务管理方法，整合流程、人员和技术三大要素，帮助IT管理人员落地，实现IT运维管理的最佳实践。'
+    },
+    {
+      url: 'https://www.microswift.top/halo/12/lzeupexm.jpg',
+      alt: 'Lenovo Care 智享服务（延保）',
+      title: '智享服务',
+      subtitle: '延长专业服务',
+      description: '保修期内不费心，我们专业的工程师为您服务'
+    },
+    {
+      url: 'https://www.microswift.top/halo/12/teffglkf.jpg',
+      alt: '企业服务',
+      title: '企业服务',
+      subtitle: '全方位的企业IT支持',
+      description: '提供7x24小时技术支持，确保企业IT系统的稳定运行，为企业发展保驾护航。'
+    }
+  ];
+
   return (
     <div className="home-page">
       {/* Hero Section */}
@@ -26,453 +271,261 @@ const Home = () => {
         <Container>
           <Motion className="hero-content">
             <h1 className="hero-title animate">
-              软件用起来才有价值，
+              我们的使命是<span className="highlight">整合</span>全球<span className="highlight">信息</span>，
               <br />
-              才有改进的机会
+              供大众使用，<span className="highlight">让人人受益</span>。
             </h1>
-            <p className="hero-description animate">
-              我们致力于通过技术创新，为企业或个人提供更便捷、更智能的生活方式
-            </p>
-            <div className="hero-buttons animate">
-              <Button 
-                variant="primary" 
-                size="large"
-                icon={<Icon name="arrow_forward" />}
-              >
-                了解更多
-              </Button>
-              <Button 
-                variant="secondary" 
-                size="large"
-                icon={<Icon name="play_circle" />}
-              >
-                观看视频
-              </Button>
+            <div className="hero-image animate">
+              <img src="https://www.microswift.top/halo/12/xfwvhmuw.jpg" alt="Bill Guffey 如何利用 Google 街景寻找创作灵感" />
+              <p className="image-caption">Bill Guffey 如何利用 Google 街景寻找创作灵感</p>
             </div>
           </Motion>
         </Container>
       </Section>
 
-      {/* Video Showcase Section */}
-      <Section className="video-section">
+      {/* Solutions Section */}
+      <Section className="solutions-tabs-section">
         <Container>
           <Motion>
-            <h2 className="section-title animate">产品展示</h2>
-            <div className="video-container animate">
-              <div className="video-wrapper">
-                <img src="/images/home/product-video-cover.jpg" alt="产品视频封面" />
-                <Button 
-                  className="play-button"
-                  variant="primary"
-                  icon={<Icon name="play_circle_filled" size="large" />}
-                  iconPosition="center"
-                />
-              </div>
-              <div className="video-content">
-                <h3>创新技术，改变生活</h3>
-                <p>了解我们如何通过技术创新，为用户提供更好的解决方案</p>
-                <div className="video-stats">
-                  <div className="stat">
-                    <Icon name="thumb_up" />
-                    <span>98% 满意度</span>
-                  </div>
-                  <div className="stat">
-                    <Icon name="groups" />
-                    <span>10万+ 用户</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Motion>
-        </Container>
-      </Section>
-
-      {/* Features Section */}
-      <Section className="features-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">致力于可持续发展</h2>
-            <Grid className="features-grid">
-              {[
-                {
-                  icon: 'rocket',
-                  title: '技术创新',
-                  description: '持续投入研发，推动技术进步'
-                },
-                {
-                  icon: 'eco',
-                  title: '绿色环保',
-                  description: '致力于可持续发展，保护地球环境'
-                },
-                {
-                  icon: 'diversity_3',
-                  title: '普惠科技',
-                  description: '让科技创新惠及更多人群'
-                },
-                {
-                  icon: 'verified_4',
-                  title: '诚信正直',
-                  description: '我们坚持诚信经营，赢得用户和合作伙伴的信任。'
-                }
-              ].map((feature, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className="feature-card animate">
-                    <CardContent>
-                      <div className="feature-icon">
-                        <Icon name={feature.icon} size="large" />
-                      </div>
-                      <h3 className="feature-title">{feature.title}</h3>
-                      <p className="feature-description">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
-
-      {/* Stats Section - 新增数据统计部分 */}
-      <Section className="stats-section">
-        <Container>
-          <Motion>
-            <Grid className="stats-grid animate">
-              {[
-                {
-                  icon: 'trending_up',
-                  number: '200+',
-                  label: '成功项目',
-                  color: 'primary'
-                },
-                {
-                  icon: 'groups',
-                  number: '50,000+',
-                  label: '服务用户',
-                  color: 'success'
-                },
-                {
-                  icon: 'workspace_premium',
-                  number: '30+',
-                  label: '技术专利',
-                  color: 'warning'
-                },
-                {
-                  icon: 'public',
-                  number: '10+',
-                  label: '服务国家',
-                  color: 'info'
-                }
-              ].map((stat, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className={`stat-card animate stat-${stat.color}`}>
-                    <CardContent>
-                      <Icon name={stat.icon} size="large" className="stat-icon" />
-                      <div className="stat-number">{stat.number}</div>
-                      <div className="stat-label">{stat.label}</div>
-                      <div className="stat-circle"></div>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
-
-      {/* Technology Stack Section */}
-      <Section className="tech-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">技术优势</h2>
-            <Tabs className="tech-tabs animate">
+            <h2 className="section-title animate">我们能做什么</h2>
+            <Tabs 
+              className="solutions-tabs animate" 
+              selectedIndex={activeTab} 
+              onSelect={handleTabChange}
+            >
               <TabList>
-                <Tab>前端技术</Tab>
-                <Tab>后端架构</Tab>
-                <Tab>云服务</Tab>
-                <Tab>人工智能</Tab>
+                {solutionTabs.map((tab, index) => (
+                  <Tab key={index}>{tab.title}</Tab>
+                ))}
               </TabList>
               
-              <TabPanel>
-                <Grid className="tech-grid">
-                  {[
-                    { icon: 'code', name: 'React', progress: 95, description: '现代化的用户界面开发' },
-                    { icon: 'palette', name: 'Vue', progress: 90, description: '灵活的渐进式框架' },
-                    { icon: 'web', name: 'Angular', progress: 85, description: '企业级应用开发' },
-                    { icon: 'phone_iphone', name: 'Flutter', progress: 88, description: '跨平台移动应用开发' }
-                  ].map((tech, index) => (
-                    <div key={index} className="tech-item">
-                      <Icon name={tech.icon} size="large" className="tech-icon" />
-                      <h4>{tech.name}</h4>
-                      <Progress value={tech.progress} color="primary" />
-                      <p className="tech-description">{tech.description}</p>
-                    </div>
-                  ))}
-                </Grid>
-              </TabPanel>
-              
-              <TabPanel>
-                <Grid className="tech-grid">
-                  {[
-                    { icon: 'storage', name: 'Node.js', progress: 92, description: '高性能服务器开发' },
-                    { icon: 'dns', name: 'Spring Boot', progress: 88, description: '企业级后端框架' },
-                    { icon: 'memory', name: 'Microservices', progress: 85, description: '微服务架构设计' },
-                    { icon: 'security', name: 'Security', progress: 90, description: '全方位安全防护' }
-                  ].map((tech, index) => (
-                    <div key={index} className="tech-item">
-                      <Icon name={tech.icon} size="large" className="tech-icon" />
-                      <h4>{tech.name}</h4>
-                      <Progress value={tech.progress} color="success" />
-                      <p className="tech-description">{tech.description}</p>
-                    </div>
-                  ))}
-                </Grid>
-              </TabPanel>
-
-              <TabPanel>
-                <Grid className="tech-grid">
-                  {[
-                    { icon: 'cloud', name: 'AWS', progress: 90, description: '云服务基础设施' },
-                    { icon: 'backup', name: 'Azure', progress: 85, description: '企业云解决方案' },
-                    { icon: 'cloud_sync', name: 'DevOps', progress: 88, description: '自动化部署和运维' },
-                    { icon: 'shield', name: 'Security', progress: 92, description: '云安全防护' }
-                  ].map((tech, index) => (
-                    <div key={index} className="tech-item">
-                      <Icon name={tech.icon} size="large" className="tech-icon" />
-                      <h4>{tech.name}</h4>
-                      <Progress value={tech.progress} color="info" />
-                      <p className="tech-description">{tech.description}</p>
-                    </div>
-                  ))}
-                </Grid>
-              </TabPanel>
-
-              <TabPanel>
-                <Grid className="tech-grid">
-                  {[
-                    { icon: 'psychology', name: '机器学习', progress: 85, description: '智能算法研发' },
-                    { icon: 'hub', name: '深度学习', progress: 82, description: '神经网络模型' },
-                    { icon: 'analytics', name: '数据分析', progress: 88, description: '大数据处理分析' },
-                    { icon: 'auto_awesome', name: 'NLP', progress: 80, description: '自然语言处理' }
-                  ].map((tech, index) => (
-                    <div key={index} className="tech-item">
-                      <Icon name={tech.icon} size="large" className="tech-icon" />
-                      <h4>{tech.name}</h4>
-                      <Progress value={tech.progress} color="warning" />
-                      <p className="tech-description">{tech.description}</p>
-                    </div>
-                  ))}
-                </Grid>
-              </TabPanel>
+              {solutionTabs.map((tab, index) => (
+                <TabPanel key={index}>
+                  <Grid className="solutions-grid">
+                    {tab.data.map((item, idx) => (
+                      <Card key={idx} className="solution-item">
+                        <div className="solution-icon">
+                          <Icon name={item.icon} />
+                        </div>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                        <div className="solution-features">
+                          {item.features.map((feature, fidx) => (
+                            <div key={fidx} className="feature-item">
+                              <Icon name="check_circle" />
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </Card>
+                    ))}
+                  </Grid>
+                </TabPanel>
+              ))}
             </Tabs>
           </Motion>
         </Container>
       </Section>
 
-      {/* Solutions Section - 新增解决方案部分 */}
-      <Section className="solutions-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">解决方案</h2>
-            <p className="section-description animate">
-              为不同行业提供专业的数字化解决方案，助力企业转型升级
-            </p>
-            <Grid className="solutions-grid">
-              {[
-                {
-                  icon: 'factory',
-                  title: '智能制造',
-                  description: '工业4.0解决方案，实现生产智能化',
-                  features: ['生产监控', '预测维护', '质量管理', '库存优化'],
-                  color: 'primary'
-                },
-                {
-                  icon: 'shopping_cart',
-                  title: '智慧零售',
-                  description: '全渠道零售解决方案，提升购物体验',
-                  features: ['会员管理', '库存管理', '营销活动', '数据分析'],
-                  color: 'success'
-                },
-                {
-                  icon: 'account_balance',
-                  title: '金融科技',
-                  description: '安全可靠的金融科技解决方案',
-                  features: ['风险控制', '支付系统', '智能投顾', '区块链'],
-                  color: 'info'
-                }
-              ].map((solution, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className={`solution-card animate solution-${solution.color}`}>
-                    <CardContent>
-                      <div className="solution-icon">
-                        <Icon name={solution.icon} size="large" />
-                      </div>
-                      <h3 className="solution-title">{solution.title}</h3>
-                      <p className="solution-description">{solution.description}</p>
-                      <div className="solution-features">
-                        {solution.features.map((feature, fIndex) => (
-                          <div key={fIndex} className="feature-item">
-                            <Icon name="check_circle" size="small" />
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <Button 
-                        variant="text"
-                        className="solution-button"
-                        icon={<Icon name="arrow_forward" />}
-                        iconPosition="right"
-                      >
-                        了解更多
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
+      {/* 我们的服务 Section */}
+      <section className="services-section">
+        <div className="container">
+          <h2 className="section-title">我们的服务</h2>
+          <Tabs className="services-tabs" selectedIndex={activeServiceTab} onSelect={index => setActiveServiceTab(index)}>
+            <TabList>
+              <Tab>IT运维服务</Tab>
+              <Tab>集成解决方案</Tab>
+            </TabList>
 
-      {/* Latest News Section */}
-      <Section className="news-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">最新动态</h2>
-            <Grid className="news-grid">
-              {[
-                {
-                  image: '/images/home/news1.jpg',
-                  category: '创新',
-                  title: '发布全新技术博客',
-                  description: '助力企业数字化转型'
-                },
-                {
-                  image: '/images/home/news2.jpg',
-                  category: '可持续发展',
-                  title: '推进有设备的地方就有服务',
-                  description: '打造官方服务中心'
-                }
-              ].map((news, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className="news-card animate">
-                    <CardMedia className="news-image">
-                      <img src={news.image} alt={news.title} />
-                      <span className="news-category">{news.category}</span>
-                    </CardMedia>
-                    <CardContent className="news-content">
-                      <h3 className="news-title">{news.title}</h3>
-                      <p className="news-description">{news.description}</p>
-                      <Button 
-                        variant="text"
-                        icon={<Icon name="arrow_forward" />}
-                        iconPosition="right"
-                      >
-                        了解更多
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
+            <TabPanel>
+              <div className="services-grid">
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="settings" />
+                  </div>
+                  <h3>IT运维管理咨询</h3>
+                  <p>硬件维护、软件应用管理、网络安全、ITIL流程框架应用等</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>硬件设备维护与管理</span></li>
+                      <li><Icon name="check_circle" /><span>软件应用部署与更新</span></li>
+                      <li><Icon name="check_circle" /><span>网络安全监控与防护</span></li>
+                      <li><Icon name="check_circle" /><span>ITIL最佳实践落地</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="support_agent" />
+                  </div>
+                  <h3>IT服务台</h3>
+                  <p>集中处理IT问题和请求的第一入口，实现IT管理过程的标准化</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>7x24小时服务支持</span></li>
+                      <li><Icon name="check_circle" /><span>标准化流程管理</span></li>
+                      <li><Icon name="check_circle" /><span>多渠道服务接入</span></li>
+                      <li><Icon name="check_circle" /><span>智能化故障处理</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="computer" />
+                  </div>
+                  <h3>桌面运维</h3>
+                  <p>桌面电脑及相关设备的维护、监控和管理等</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>设备日常维护</span></li>
+                      <li><Icon name="check_circle" /><span>性能监控优化</span></li>
+                      <li><Icon name="check_circle" /><span>软件统一管理</span></li>
+                      <li><Icon name="check_circle" /><span>安全策略部署</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="dns" />
+                  </div>
+                  <h3>数据中心运维</h3>
+                  <p>为企业信息系统提供高可用的运行环境</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>系统性能监控</span></li>
+                      <li><Icon name="check_circle" /><span>容量规划管理</span></li>
+                      <li><Icon name="check_circle" /><span>灾备方案实施</span></li>
+                      <li><Icon name="check_circle" /><span>安全防护升级</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="cloud" />
+                  </div>
+                  <h3>云运维</h3>
+                  <p>连接各大公有云提供全套服务，赋能企业云计算能力</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>多云环境管理</span></li>
+                      <li><Icon name="check_circle" /><span>资源弹性扩展</span></li>
+                      <li><Icon name="check_circle" /><span>成本优化分析</span></li>
+                      <li><Icon name="check_circle" /><span>安全合规保障</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </TabPanel>
 
-      {/* Partners Section */}
-      <Section className="partners-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">合作伙伴</h2>
-            <Grid className="partners-grid animate">
-              {[
-                { logo: '/images/partners/partner1.png', name: '合作伙伴1' },
-                { logo: '/images/partners/partner2.png', name: '合作伙伴2' },
-                { logo: '/images/partners/partner3.png', name: '合作伙伴3' },
-                { logo: '/images/partners/partner4.png', name: '合作伙伴4' }
-              ].map((partner, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className="partner-card animate">
-                    <CardContent className="partner-item">
-                      <img src={partner.logo} alt={partner.name} />
-                      <h4>{partner.name}</h4>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
+            <TabPanel>
+              <div className="services-grid">
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="work" />
+                  </div>
+                  <h3>智慧办公解决方案</h3>
+                  <p>统一管理、智能化管理办公分析需求强烈的硬件设备</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>智能办公设备</span></li>
+                      <li><Icon name="check_circle" /><span>统一管理平台</span></li>
+                      <li><Icon name="check_circle" /><span>数据分析报告</span></li>
+                      <li><Icon name="check_circle" /><span>设备优化建议</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="store" />
+                  </div>
+                  <h3>数字化门店解决方案</h3>
+                  <p>全国店面的改造与升级，监控网络及IT相关业务的搭建与部署</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>智能化改造</span></li>
+                      <li><Icon name="check_circle" /><span>网络部署优化</span></li>
+                      <li><Icon name="check_circle" /><span>设备远程管理</span></li>
+                      <li><Icon name="check_circle" /><span>数据实时监控</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="router" />
+                  </div>
+                  <h3>网络弱电解决方案</h3>
+                  <p>网络规划部署、网络优化、机房搬迁、Wi-Fi、监控部署等</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>网络架构规划</span></li>
+                      <li><Icon name="check_circle" /><span>设备部署实施</span></li>
+                      <li><Icon name="check_circle" /><span>性能优化调试</span></li>
+                      <li><Icon name="check_circle" /><span>7x24运维保障</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="service-item">
+                  <div className="service-icon">
+                    <Icon name="memory" />
+                  </div>
+                  <h3>智能算力解决方案</h3>
+                  <p>整合高效的数据算力与超融合架构，加速业务创新</p>
+                  <div className="service-hover-content">
+                    <ul>
+                      <li><Icon name="check_circle" /><span>算力资源规划</span></li>
+                      <li><Icon name="check_circle" /><span>架构优化设计</span></li>
+                      <li><Icon name="check_circle" /><span>性能监控分析</span></li>
+                      <li><Icon name="check_circle" /><span>持续优化升级</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </TabPanel>
+          </Tabs>
+        </div>
+      </section>
 
-      {/* Case Studies Section */}
-      <Section className="cases-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">成功案例</h2>
-            <Grid className="cases-grid">
-              {[
-                {
-                  image: '/images/cases/case1.jpg',
-                  title: '企业数字化转型',
-                  description: '帮助传统企业实现数字化转型，提升运营效率',
-                  stats: { roi: '+150%', time: '-60%' }
-                },
-                {
-                  image: '/images/cases/case2.jpg',
-                  title: '智能工厂解决方案',
-                  description: '打造智能制造示范工厂，实现生产智能化',
-                  stats: { efficiency: '+200%', cost: '-40%' }
-                }
-              ].map((case_, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className="case-card animate">
-                    <CardMedia className="case-image">
-                      <img src={case_.image} alt={case_.title} />
-                    </CardMedia>
-                    <CardContent>
-                      <h3>{case_.title}</h3>
-                      <p>{case_.description}</p>
-                      <div className="case-stats">
-                        {Object.entries(case_.stats).map(([key, value]) => (
-                          <div key={key} className="stat">
-                            <div className="value">{value}</div>
-                            <div className="label">{key}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
+      {/* 产品生命周期服务体验 Section */}
+      <section className="product-lifecycle-section">
+        <div className="container">
+          <h2 className="section-title">产品生命周期服务体验</h2>
+          <p className="section-subtitle">全方位深化客户满意度</p>
+          <Tabs className="lifecycle-tabs">
+            <TabList>
+              <Tab>多品牌厂商定制服务</Tab>
+              <Tab>微讯云自营定制服务</Tab> 
+              <Tab>增值服务</Tab>
+            </TabList>
 
-      {/* Awards Section */}
-      <Section className="awards-section">
-        <Container>
-          <Motion>
-            <h2 className="section-title animate">荣誉与认证</h2>
-            <Grid className="awards-grid animate">
-              {[
-                { image: '/images/awards/award1.jpg', title: '年度创新企业' },
-                { image: '/images/awards/award2.jpg', title: '技术领军企业' },
-                { image: '/images/awards/award3.jpg', title: '最佳解决方案奖' }
-              ].map((award, index) => (
-                <Motion key={index} delay={index * 0.1}>
-                  <Card className="award-card animate">
-                    <CardContent className="award-item">
-                      <img src={award.image} alt={award.title} />
-                      <h4>{award.title}</h4>
-                    </CardContent>
-                  </Card>
-                </Motion>
-              ))}
-            </Grid>
-          </Motion>
-        </Container>
-      </Section>
+            <TabPanel>
+              <div className="carousel-container">
+                <Carousel 
+                  images={carouselImages.slice(0, 2)} 
+                  autoPlayInterval={5000}
+                />
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+              <div className="carousel-container">
+                <Carousel 
+                  images={carouselImages.slice(2, 4)} 
+                  autoPlayInterval={5000}
+                />
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+              <div className="carousel-container">
+                <Carousel 
+                  images={carouselImages.slice(4, 6)} 
+                  autoPlayInterval={5000}
+                />
+              </div>
+            </TabPanel>
+          </Tabs>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <Section className="cta-section">
@@ -482,23 +535,25 @@ const Home = () => {
             <p className="cta-description animate">
               探索更多机会，与我们一起推动技术创新
             </p>
-            <div className="cta-buttons animate">
-              <Button 
-                variant="primary" 
-                size="large"
-                icon={<Icon name="arrow_forward" />}
-              >
-                查看机会
-              </Button>
-              <Button 
-                variant="secondary" 
-                size="large"
-                icon={<Icon name="mail" />}
-              >
-                联系我们
-              </Button>
-            </div>
           </Motion>
+          <div className="cta-buttons">
+            <Button 
+              variant="primary" 
+              size="large"
+              icon={<Icon name="arrow_forward" />}
+              onClick={() => window.location.href = '/careers'}
+            >
+              查看机会
+            </Button>
+            <Button 
+              variant="secondary" 
+              size="large"
+              icon={<Icon name="mail" />}
+              onClick={() => window.location.href = '/contact'}
+            >
+              联系我们
+            </Button>
+          </div>
         </Container>
       </Section>
     </div>

@@ -122,7 +122,7 @@ const Footer = () => {
             </button>
             <button className="locale-switch">
               <Icon name="public" />
-              <span>中国@酒泉</span>
+              <span>中国 - 酒泉</span>
             </button>
           </div>
         </div>

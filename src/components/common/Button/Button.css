@@ -4,78 +4,96 @@
   justify-content: center;
   position: relative;
   border: none;
-  border-radius: var(--radius-full);
-  font-weight: var(--font-weight-medium);
+  border-radius: 20px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all var(--transition-normal);
   text-decoration: none;
-  gap: var(--spacing-sm);
-  transform: scale(1);
+  gap: 8px;
+  padding: 0 24px;
+  height: 40px;
+  font-size: 0.875rem;
+  letter-spacing: 0.25px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* Variants */
 .button-primary {
-  background-color: var(--primary-color);
-  color: var(--text-white);
-  padding: 0 var(--spacing-xl);
-  height: 36px;
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.25px;
+  background-color: #1a73e8;
+  color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 .button-primary:hover {
-  background-color: #3367d6;
-  box-shadow: var(--shadow-md);
+  background-color: #1557b0;
+  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+}
+
+.button-primary:active {
+  background-color: #174ea6;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
 }
 
 .button-secondary {
-  background-color: var(--background-light);
-  color: var(--primary-color);
-  padding: 0 var(--spacing-xl);
-  height: 36px;
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.25px;
+  background-color: #fff;
+  color: #1a73e8;
+  border: 1px solid #dadce0;
 }
 
 .button-secondary:hover {
-  background-color: var(--background-hover);
+  background-color: #f6fafe;
+  border-color: #d2e3fc;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 1px 3px 1px rgba(60, 64, 67, 0.1);
+}
+
+.button-secondary:active {
+  background-color: #e8f1fe;
+  border-color: #d2e3fc;
 }
 
 .button-text {
   background: none;
-  color: var(--primary-color);
-  padding: 0;
+  color: #1a73e8;
+  padding: 0 8px;
+  height: 36px;
 }
 
 .button-text:hover {
-  background: none;
-  color: #3367d6;
+  background-color: rgba(26, 115, 232, 0.04);
+}
+
+.button-text:active {
+  background-color: rgba(26, 115, 232, 0.12);
 }
 
 /* Sizes */
 .button-sm {
   height: 32px;
-  padding: 0 var(--spacing-lg);
-  font-size: var(--font-size-sm);
+  padding: 0 16px;
+  font-size: 0.875rem;
 }
 
 .button-md {
   height: 40px;
-  padding: 0 var(--spacing-xl);
-  font-size: var(--font-size-base);
+  padding: 0 24px;
+  font-size: 0.875rem;
 }
 
 .button-lg {
   height: 48px;
-  padding: 0 var(--spacing-2xl);
-  font-size: var(--font-size-lg);
+  padding: 0 32px;
+  font-size: 1rem;
 }
 
 /* States */
 .button:disabled {
-  opacity: 0.6;
+  background-color: rgba(60, 64, 67, 0.12);
+  color: rgba(60, 64, 67, 0.38);
   cursor: not-allowed;
+  box-shadow: none;
+  border: none;
 }
 
 .button-loading {
@@ -88,10 +106,10 @@
 
 .button-spinner {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 2px solid transparent;
-  border-top-color: currentColor;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
   border-radius: 50%;
   animation: button-spin 0.8s linear infinite;
 }
@@ -103,11 +121,13 @@
 
 /* Icons */
 .button-icon-left {
-  margin-right: var(--spacing-xs);
+  margin-right: 8px;
+  font-size: 18px;
 }
 
 .button-icon-right {
-  margin-left: var(--spacing-xs);
+  margin-left: 8px;
+  font-size: 18px;
 }
 
 @keyframes button-spin {
@@ -116,30 +136,36 @@
   }
 }
 
-/* 添加新的按钮变体 */
-.button-outlined {
-  background: transparent;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+/* Ripple effect */
+.button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
 }
 
-.button-outlined:hover {
-  background: rgba(66, 133, 244, 0.04);
+.button:focus:not(:active)::after {
+  animation: ripple 0.8s ease-out;
 }
 
-.button-text-primary {
-  background: none;
-  color: var(--primary-color);
-  padding: 0 var(--spacing-md);
-}
-
-.button-text-secondary {
-  background: none;
-  color: var(--text-secondary);
-  padding: 0 var(--spacing-md);
-}
-
-/* Google 风格的按钮动画 */
-.button:active {
-  transform: scale(0.96);
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
 } 

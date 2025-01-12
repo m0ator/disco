@@ -1,86 +1,78 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Icon } from '../Icon/Icon';
+import React, { useState, useEffect } from 'react';
+import Icon from '../Icon/Icon';
 import './Carousel.css';
 
-export const Carousel = ({
-  items,
-  autoPlay = true,
-  interval = 5000,
-  showArrows = true,
-  showDots = true,
-  effect = 'slide',
-  className = ''
-}) => {
+const Carousel = ({ images, autoPlayInterval = 3000, showDots = true, showArrows = true }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
-  const timerRef = useRef(null);
-
-  const next = () => {
-    setCurrentIndex((current) => (current + 1) % items.length);
-  };
-
-  const prev = () => {
-    setCurrentIndex((current) => (current - 1 + items.length) % items.length);
-  };
-
-  const goTo = (index) => {
-    setCurrentIndex(index);
-  };
-
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
-    if (isPlaying) {
-      timerRef.current = setInterval(next, interval);
+    let interval;
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, autoPlayInterval);
     }
-    return () => clearInterval(timerRef.current);
-  }, [isPlaying, interval]);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, images.length, autoPlayInterval]);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setIsAutoPlaying(false);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setIsAutoPlaying(false);
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseEnter = () => setIsAutoPlaying(false);
+  const handleMouseLeave = () => setIsAutoPlaying(true);
 
   return (
     <div 
-      className={`
-        carousel 
-        carousel-${effect}
-        ${className}
-      `}
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => autoPlay && setIsPlaying(true)}
+      className="carousel" 
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <div 
-        className="carousel-container"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {items.map((item, index) => (
-          <div key={index} className="carousel-item">
-            {item.type === 'image' ? (
-              <img src={item.src} alt={item.alt || ''} />
-            ) : (
-              <video
-                src={item.src}
-                poster={item.poster}
-                controls={item.controls}
-                muted={item.muted}
-                loop={item.loop}
-              />
-            )}
-            {item.caption && (
-              <div className="carousel-caption">
-                <h3>{item.caption.title}</h3>
-                <p>{item.caption.description}</p>
-              </div>
-            )}
+      <div className="carousel-container">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`carousel-slide ${index === currentIndex ? 'active' : ''}`}
+            style={{
+              transform: `translateX(${(index - currentIndex) * 100}%)`,
+            }}
+          >
+            <img src={image.url} alt={image.alt || `Slide ${index + 1}`} />
+            <div className="carousel-content">
+              {image.title && <h2 className="carousel-title">{image.title}</h2>}
+              {image.subtitle && <h3 className="carousel-subtitle">{image.subtitle}</h3>}
+              {image.description && <p className="carousel-description">{image.description}</p>}
+            </div>
           </div>
         ))}
       </div>
 
       {showArrows && (
         <>
-          <button className="carousel-arrow arrow-prev" onClick={prev}>
+          <button 
+            className="carousel-button prev" 
+            onClick={handlePrevious}
+            aria-label="Previous slide"
+          >
             <Icon name="chevron_left" />
           </button>
-          <button className="carousel-arrow arrow-next" onClick={next}>
+          <button 
+            className="carousel-button next" 
+            onClick={handleNext}
+            aria-label="Next slide"
+          >
             <Icon name="chevron_right" />
           </button>
         </>
@@ -88,27 +80,18 @@ export const Carousel = ({
 
       {showDots && (
         <div className="carousel-dots">
-          {items.map((_, index) => (
+          {images.map((_, index) => (
             <button
               key={index}
               className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => goTo(index)}
+              onClick={() => handleDotClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       )}
-
-      <button className="carousel-play" onClick={togglePlay}>
-        <Icon name={isPlaying ? 'pause' : 'play_arrow'} />
-      </button>
     </div>
   );
 };
 
-export const CarouselItem = ({ children, className = '' }) => {
-  return (
-    <div className={`carousel-item ${className}`}>
-      {children}
-    </div>
-  );
-}; 
+export default Carousel; 

@@ -24,6 +24,7 @@ export { default as Modal } from './Modal/Modal';
 export { ProgressBar as Progress } from './Progress/Progress';
 export { ToastProvider as Toast, useToast } from './Toast/Toast';
 export { default as Motion } from './Motion/Motion';
+export { default as ContactModal } from './ContactModal/ContactModal';
 
 // 其他组件
 export { Accordion, AccordionHeader, AccordionContent } from './Accordion/Accordion';
@@ -34,3 +35,4 @@ export { Card, CardMedia, CardContent, CardActions } from './Card/Card';
 export { Chip, ChipGroup } from './Chip/Chip';
 export { Dropdown, DropdownItem } from './Dropdown/Dropdown';
 export { Empty, NoData, NoResult } from './Empty/Empty';
+export * from './Carousel';
