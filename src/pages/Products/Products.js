@@ -1,344 +1,407 @@
-import React from 'react';
-import { Section } from '../../components/common';
-import Button from '../../components/common/Button/Button';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../components/common/Icon/Icon';
+import Button from '../../components/common/Button/Button';
+import ContactModal from '../../components/common/ContactModal/ContactModal';
+import ServiceTabs from '../../components/common/ServiceTabs/ServiceTabs';
+import CaseStudies from '../../components/common/CaseStudies/CaseStudies';
+import CoreAdvantages from '../../components/common/CoreAdvantages/CoreAdvantages';
 import './Products.css';
 
 const Products = () => {
-  const products = {
-    manufacturing: {
-      title: '技术社区平台',
-      description: '可开放，可私有，可定制',
-      image: 'https://www.microswift.top/halo/05/gbymherp.webp',
-      features: [
-        '人人可用',
-        '无需编程',
-        '结构简单',
-        '成本低廉',
-        '界面美观',
-        '功能强大'
-      ],
-      details: [
-        {
-          icon: 'precision_manufacturing',
-          title: '优化管理',
-          description: '实时监控成员状态，作用权限，提高安全'
-        },
-        {
-          icon: 'analytics',
-          title: '全文摘要，AI对话',
-          description: '接入ChatGPT，实现全文摘要，AI对话'
-        },
-        {
-          icon: 'inventory_2',
-          title: '人人可用',
-          description: '人人可用，无需编程，人人可用'
-        }
-      ]
-    },
-    analytics: {
-      title: '极速网盘',
-      description: '极速上传，极速下载，极速分享',
-      image: 'https://www.microswift.top/halo/05/gbymherp.webp',
-      features: [
-        '多端同步',
-        '极速下载',
-        '极速分享',
-        '极速存储',
-        '方便管理',
-        '极速安全'
-      ],
-      details: [
-        {
-          icon: 'query_stats',
-          title: '极速上传',
-          description: '高性能实时数据处理引擎，支持海量数据分析'
-        },
-        {
-          icon: 'insights',
-          title: '极速下载',
-          description: '极速下载，极速分享'
-        },
-        {
-          icon: 'donut_large',
-          title: '多端可用',
-          description: '多端可用，随时随地，随时随地'
-        }
-      ]
-    }
-  };
+  const [showContactModal, setShowContactModal] = useState(false);
+  const navigate = useNavigate();
 
-  const solutions = [
+  // 合作流程数据
+  const cooperationSteps = [
+    {
+      icon: 'handshake',
+      title: '需求沟通',
+      description: '深入了解客户业务场景和痛点，确定核心需求'
+    },
     {
       icon: 'architecture',
-      title: '系统架构',
-      description: '采用微服务架构，确保系统高可用性和可扩展性'
+      title: '方案设计',
+      description: '基于需求定制专业解决方案，优化业务流程'
+    },
+    {
+      icon: 'engineering',
+      title: '技术实施',
+      description: '专业团队快速交付，确保方案落地实施'
+    },
+    {
+      icon: 'support_agent',
+      title: '持续服务',
+      description: '提供全方位技术支持，保障系统稳定运行'
+    }
+  ];
+
+  const stepsRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '50px'
+      }
+    );
+
+    const stepCards = stepsRef.current?.querySelectorAll('.step-card');
+    stepCards?.forEach((card) => observer.observe(card));
+
+    return () => {
+      stepCards?.forEach((card) => observer.unobserve(card));
+    };
+  }, []);
+
+  const handleViewCases = () => {
+    navigate('/stories'); // 跳转到故事页面
+  };
+
+  const serviceItems = [
+    {
+      icon: 'memory',
+      title: '硬件加装升级',
+      description: '专业硬件升级服务，提升设备性能，延长设备使用寿命。我们提供从配件选型到安装调试的一站式服务。',
+      features: [
+        'SSD固态硬盘升级',
+        '内存条扩容升级',
+        '显卡升级替换',
+        '散热系统优化',
+        '电源模组升级',
+        '机箱改装服务'
+      ],
+      price: '￥299起',
+      time: '1-3小时'
+    },
+    {
+      icon: 'terminal',
+      title: '软件部署调优',
+      description: '专业的软件环境配置与系统优化服务，提升系统运行效率，优化软件使用体验。',
+      features: [
+        '系统性能优化',
+        '专业软件安装',
+        '开发环境配置',
+        '驱动程序更新',
+        '系统安全加固',
+        '性能监控部署'
+      ],
+      price: '￥199起',
+      time: '1-2小时'
+    },
+    {
+      icon: 'build',
+      title: '故障检测维修',
+      description: '专业的故障诊断与维修服务，快速解决各类硬件故障，提供详细的检测报告。',
+      features: [
+        '硬件故障检测',
+        '部件维修更换',
+        '系统故障修复',
+        '蓝屏问题处理',
+        '病毒木马清除',
+        '性能问题诊断'
+      ],
+      price: '￥199起',
+      time: '1-4小时'
+    },
+    {
+      icon: 'computer',
+      title: 'DIY装机服务',
+      description: '专业的电脑装机服务，从配件选购到系统部署的一站式服务，打造专属于您的电脑。',
+      features: [
+        '配件挑选建议',
+        '整机组装服务',
+        '系统安装调试',
+        '性能测试调优',
+        '跑分性能测试',
+        '保修质保服务'
+      ],
+      price: '￥299起',
+      time: '2-4小时'
     },
     {
       icon: 'security',
-      title: '安全保障',
-      description: '多层次安全防护，保护数据和业务安全'
+      title: '整机延保服务',
+      description: '专业的电脑延保服务，延长设备保修期限，提供更长久的售后保障。',
+      features: [
+        '延长保修期限',
+        '免费检测维修',
+        '优先维修服务',
+        '备用机服务',
+        '定期保养维护',
+        '上门服务支持'
+      ],
+      price: '￥499起/年',
+      time: '全年服务'
     },
     {
-      icon: 'support',
-      title: '技术支持',
-      description: '7x24小时专业技术支持和运维服务'
+      icon: 'cleaning_services',
+      title: '电脑清洁保养',
+      description: '专业的电脑清洁保养服务，延长设备使用寿命，保持最佳使用状态。',
+      features: [
+        '深度清洁除尘',
+        '散热系统清理',
+        '键盘深度清洁',
+        '屏幕专业清洁',
+        '接口清洁保养',
+        '导热硅脂更换'
+      ],
+      price: '￥159起',
+      time: '1-2小时'
+    },
+    {
+      icon: 'restore',
+      title: '电脑系统重装',
+      description: '专业的系统重装服务，解决系统顽固问题，提供纯净稳定的使用环境。',
+      features: [
+        '系统备份还原',
+        '深度系统清理',
+        '驱动程序安装',
+        '软件环境配置',
+        '数据迁移服务',
+        '远程技术支持'
+      ],
+      price: '￥199起',
+      time: '2-3小时'
+    },
+    {
+      icon: 'storage',
+      title: '数据恢复服务',
+      description: '专业的数据恢复服务，针对各类数据丢失情况提供专业的恢复方案。',
+      features: [
+        '误删数据恢复',
+        '硬盘数据恢复',
+        '分区表修复',
+        '文件系统修复',
+        '固态硬盘恢复',
+        'RAID数据恢复'
+      ],
+      price: '￥599起',
+      time: '24-72小时'
+    },
+    {
+      icon: 'recycling',
+      title: '资产回收服务',
+      description: '专业的电子设备回收服务，提供旧设备回收、数据安全销毁等服务。',
+      features: [
+        '整机回收服务',
+        '配件回收服务',
+        '数据安全销毁',
+        '环保处理服务',
+        '高价回收估价',
+        '上门回收服务'
+      ],
+      price: '具体询价',
+      time: '当天完成'
     }
   ];
 
-  const advantages = [
+  const caseStudies = [
     {
-      title: '技术创新',
-      description: '持续投入研发，保持技术领先优势',
-      icon: 'lightbulb'
-    },
-    {
-      title: '行业经验',
-      description: '深耕行业多年，积累丰富实践经验',
-      icon: 'business'
-    },
-    {
-      title: '服务保障',
-      description: '完善的服务体系，确保项目顺利实施',
-      icon: 'verified'
-    }
-  ];
-
-  const cases = [
-    {
-      company: '技术社区',
-      title: '效率提升40%',
-      description: '通过部署智能制造解决方案，实现生产流程优化，显著提升效率',
+      title: '某大型金融机构IT基础设施升级',
+      industry: '金融行业',
+      category: 'finance',
       image: 'https://www.microswift.top/halo/06/case1.jpg',
-      results: ['效率提升40%', '质量控制准确率99%', '运维成本降低30%']
+      description: '为客户提供全面的IT基础设施升级解决方案，实现系统性能提升和安全保障。',
+      highlights: [
+        '系统性能提升40%',
+        '运维成本降低30%',
+        '安全事件响应提速50%',
+        '服务可用性达99.99%'
+      ]
     },
     {
-      company: '影像、婚纱店',
-      title: '方便、快捷、安全',
-      description: '借助我们的云服务，实现极速上传，极速下载，极速分享',
+      title: '全国连锁教育机构数字化转型',
+      industry: '教育行业',
+      category: 'education',
       image: 'https://www.microswift.top/halo/06/case2.jpg',
-      results: ['营销转化率提升35%', '周转率提升25%', '运营成本降低20%']
-    }
-  ];
-
-  const features = [
-    {
-      icon: 'cloud_done',
-      title: '云原生架构',
-      description: '基于云原生技术栈，提供灵活可扩展的服务'
+      description: '助力教育机构实现数字化转型，打造智慧校园解决方案。',
+      highlights: [
+        '教学效率提升35%',
+        '管理成本降低25%',
+        '师生满意度提升40%',
+        '运营效率提升50%'
+      ]
     },
     {
-      icon: 'api',
-      title: '开放API',
-      description: '提供标准REST API，支持灵活的系统集成'
+      title: '三甲医院智慧医疗系统升级',
+      industry: '医疗行业',
+      category: 'medical',
+      image: 'https://www.microswift.top/halo/06/case3.jpg',
+      description: '为医院提供智慧医疗解决方案，提升医疗服务质量和效率。',
+      highlights: [
+        '就诊等待时间减少60%',
+        '医疗记录数字化率99%',
+        '诊疗效率提升45%',
+        '患者满意度提升55%'
+      ]
     },
     {
-      icon: 'speed',
-      title: '高性能',
-      description: '优化的系统架构，确保高并发和低延迟'
+      title: '大型零售连锁店智能化改造',
+      industry: '零售行业',
+      category: 'retail',
+      image: 'https://www.microswift.top/halo/06/case4.jpg',
+      description: '为零售企业打造智能化运营系统，实现全渠道数字化转型。',
+      highlights: [
+        '库存周转率提升25%',
+        '运营成本降低35%',
+        '客户转化率提升30%',
+        '会员复购率提升40%'
+      ]
     },
     {
-      icon: 'security',
-      title: '安全可靠',
-      description: '多层安全防护，确保数据和业务安全'
+      title: '制造业生产线智能化升级',
+      industry: '制造行业',
+      category: 'manufacture',
+      image: 'https://www.microswift.top/halo/06/case5.jpg',
+      description: '为制造企业提供智能制造解决方案，提升生产效率和产品质量。',
+      highlights: [
+        '生产效率提升50%',
+        '产品不良率降低60%',
+        '能源成本降低30%',
+        '设备利用率提升45%'
+      ]
+    },
+    {
+      title: '某银行核心系统安全升级',
+      industry: '金融行业',
+      category: 'finance',
+      image: 'https://www.microswift.top/halo/06/case6.jpg',
+      description: '为银行提供核心系统安全升级方案，提升系统安全性和可靠性。',
+      highlights: [
+        '系统安全等级提升',
+        '故障响应时间降低70%',
+        '业务连续性提升99.999%',
+        '运维效率提升65%'
+      ]
+    },
+    {
+      title: '高校智慧教室建设项目',
+      industry: '教育行业',
+      category: 'education',
+      image: 'https://www.microswift.top/halo/06/case7.jpg',
+      description: '为高校打造智慧教室解决方案，提升教学体验和效果。',
+      highlights: [
+        '课堂互动率提升80%',
+        '教学资源利用率提升60%',
+        '学习效果提升45%',
+        '师生满意度95%'
+      ]
+    },
+    {
+      title: '社区医院远程诊疗平台',
+      industry: '医疗行业',
+      category: 'medical',
+      image: 'https://www.microswift.top/halo/06/case8.jpg',
+      description: '构建社区医院远程诊疗平台，提供便捷医疗服务。',
+      highlights: [
+        '服务覆盖率提升75%',
+        '就医成本降低40%',
+        '诊疗效率提升50%',
+        '患者满意度90%'
+      ]
+    },
+    {
+      title: '新零售数字化运营平台',
+      industry: '零售行业',
+      category: 'retail',
+      image: 'https://www.microswift.top/halo/06/case9.jpg',
+      description: '打造新零售数字化运营平台，实现线上线下一体化运营。',
+      highlights: [
+        '全渠道销售提升45%',
+        '运营成本降低30%',
+        '客户体验提升55%',
+        '数据分析效率提升70%'
+      ]
+    },
+    {
+      title: '智能工厂数字化转型',
+      industry: '制造行业',
+      category: 'manufacture',
+      image: 'https://www.microswift.top/halo/06/case10.jpg',
+      description: '助力工厂实现数字化转型，打造智能制造示范工厂。',
+      highlights: [
+        '生产效率提升65%',
+        '质量控制准确率99%',
+        '库存周转率提升40%',
+        '能源使用效率提升50%'
+      ]
     }
   ];
 
   return (
     <div className="products-page">
+      {/* Hero Section */}
       <section className="hero-section">
         <div className="container">
-          <h1 className="hero-title">产品方案</h1>
-          <p className="hero-subtitle">为企业提供全方位的智能解决方案</p>
-        </div>
-      </section>
-
-      <section id="manufacturing" className="products-section">
-        <div className="container">
-          <h2 className="section-title">智能制造解决方案</h2>
-          <div className="product-hero">
-            <div className="product-image">
-              <img src={products.manufacturing.image} alt={products.manufacturing.title} />
-            </div>
-            <div className="product-overview">
-              <h3 className="product-title">{products.manufacturing.title}</h3>
-              <p className="product-description">{products.manufacturing.description}</p>
-              <div className="product-features">
-                {products.manufacturing.features.map((feature, i) => (
-                  <div key={i} className="feature-tag">
-                    <Icon name="check_circle" />
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
-              <Button variant="primary" size="large">了解详情</Button>
-            </div>
-          </div>
-          <div className="product-details">
-            {products.manufacturing.details.map((detail, index) => (
-              <div key={index} className="detail-card">
-                <div className="detail-icon">
-                  <Icon name={detail.icon} />
-                </div>
-                <h4 className="detail-title">{detail.title}</h4>
-                <p className="detail-description">{detail.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="analytics" className="products-section">
-        <div className="container">
-          <h2 className="section-title">数据分析平台</h2>
-          <div className="product-hero">
-            <div className="product-overview">
-              <h3 className="product-title">{products.analytics.title}</h3>
-              <p className="product-description">{products.analytics.description}</p>
-              <div className="product-features">
-                {products.analytics.features.map((feature, i) => (
-                  <div key={i} className="feature-tag">
-                    <Icon name="check_circle" />
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
-              <Button variant="primary" size="large">了解详情</Button>
-            </div>
-            <div className="product-image">
-              <img src={products.analytics.image} alt={products.analytics.title} />
-            </div>
-          </div>
-          <div className="product-details">
-            {products.analytics.details.map((detail, index) => (
-              <div key={index} className="detail-card">
-                <div className="detail-icon">
-                  <Icon name={detail.icon} />
-                </div>
-                <h4 className="detail-title">{detail.title}</h4>
-                <p className="detail-description">{detail.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="solutions" className="solutions-section">
-        <div className="container">
-          <h2 className="section-title">解决方案优势</h2>
-          <div className="solutions-grid">
-            {solutions.map((solution, index) => (
-              <div key={index} className="solution-card">
-                <div className="solution-icon">
-                  <Icon name={solution.icon} />
-                </div>
-                <h3 className="solution-title">{solution.title}</h3>
-                <p className="solution-description">{solution.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="advantages-section">
-        <div className="container">
-          <h2 className="section-title">为什么选择我们</h2>
-          <div className="advantages-grid">
-            {advantages.map((advantage, index) => (
-              <div key={index} className="advantage-card">
-                <div className="advantage-icon">
-                  <Icon name={advantage.icon} />
-                </div>
-                <div className="advantage-content">
-                  <h3 className="advantage-title">{advantage.title}</h3>
-                  <p className="advantage-description">{advantage.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="features" className="features-section">
-        <div className="container">
-          <h2 className="section-title">核心技术特点</h2>
-          <p className="section-subtitle">
-            采用先进技术架构，为企业提供可靠的技术保障
+          <h1 className="hero-title">精准聚焦各行业客户需求</h1>
+          <p className="hero-subtitle">
+            助力个人或企业降本增效，打造智能化、数字化的未来
           </p>
-          <div className="features-grid">
-            {features.map((feature, index) => (
-              <div key={index} className="feature-card">
-                <div className="feature-icon">
-                  <Icon name={feature.icon} />
-                </div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="cases-section">
-        <div className="container">
-          <h2 className="section-title">成功案例</h2>
-          <p className="section-subtitle">
-            了解我们如何帮助客户实现业务增长
-          </p>
-          <div className="cases-grid">
-            {cases.map((case_, index) => (
-              <div key={index} className="case-card">
-                <div className="case-image">
-                  <img src={case_.image} alt={case_.title} />
-                  <span className="case-company">{case_.company}</span>
-                </div>
-                <div className="case-content">
-                  <h3 className="case-title">{case_.title}</h3>
-                  <p className="case-description">{case_.description}</p>
-                  <div className="case-results">
-                    {case_.results.map((result, i) => (
-                      <div key={i} className="result-item">
-                        <Icon name="trending_up" />
-                        <span>{result}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <Button variant="text">
-                    查看详情
-                    <Icon name="arrow_forward" />
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="process" className="process-section">
+      {/* Cooperation Process */}
+      <section className="cooperation-section">
         <div className="container">
           <h2 className="section-title">合作流程</h2>
-          <div className="process-steps">
-            {[
-              { icon: 'chat', title: '需求沟通', description: '深入了解您的业务需求' },
-              { icon: 'design_services', title: '方案设计', description: '定制专属解决方案' },
-              { icon: 'engineering', title: '开发实施', description: '专业团队保障项目实施' },
-              { icon: 'support_agent', title: '持续服务', description: '提供长期技术支持' }
-            ].map((step, index) => (
-              <div key={index} className="process-step">
+          <p className="section-description">
+            专业的服务团队，标准化的合作流程，确保项目顺利交付
+          </p>
+          
+          <div className="cooperation-steps" ref={stepsRef}>
+            {cooperationSteps.map((step, index) => (
+              <div key={index} className="step-card">
                 <div className="step-icon">
                   <Icon name={step.icon} />
                 </div>
                 <h3 className="step-title">{step.title}</h3>
                 <p className="step-description">{step.description}</p>
-                {index < 3 && <div className="step-arrow">
-                  <Icon name="arrow_forward" />
-                </div>}
+                <div className="step-number">{index + 1}</div>
+                {index < cooperationSteps.length - 1 && (
+                  <div className="step-connector">
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Services Section */}
+      <section className="services-section">
+        <div className="container">
+          <h2 className="section-title">服务内容</h2>
+          <p className="section-description">
+            专业的技术团队，为您提供全方位的硬件升级与软件优化服务
+          </p>
+          <ServiceTabs items={serviceItems} />
+        </div>
+      </section>
+
+      <CoreAdvantages />
+
+      <section className="case-section">
+        <div className="container">
+          <h2 className="section-title">服务案例</h2>
+          <p className="section-description">
+            深耕行业多年，为众多企业提供专业的IT服务解决方案
+          </p>
+          <CaseStudies items={caseStudies} />
+        </div>
+      </section>
+
+      {/* CTA Section - 移到最后 */}
       <section className="cta-section">
         <div className="container">
           <h2 className="cta-title">寻找适合您的解决方案</h2>
@@ -346,15 +409,29 @@ const Products = () => {
             我们的专家团队随时为您提供专业咨询和支持
           </p>
           <div className="cta-buttons">
-            <Button variant="primary" size="large">
+            <Button 
+              variant="primary" 
+              size="large"
+              onClick={() => setShowContactModal(true)}
+            >
               联系我们
             </Button>
-            <Button variant="secondary" size="large">
+            <Button 
+              variant="secondary" 
+              size="large"
+              onClick={handleViewCases}
+            >
               查看案例
             </Button>
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+      />
     </div>
   );
 };

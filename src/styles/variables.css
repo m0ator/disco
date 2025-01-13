@@ -58,8 +58,7 @@
                0 1px 3px 1px rgba(60, 64, 67, 0.08);
   --shadow-md: 0 2px 4px -1px rgba(60, 64, 67, 0.1), 
                0 4px 6px -1px rgba(60, 64, 67, 0.08);
-  --shadow-lg: 0 8px 12px -4px rgba(60, 64, 67, 0.1),
-               0 12px 16px -4px rgba(60, 64, 67, 0.08);
+  --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
 
   /* 圆角 */
   --radius-sm: 4px;
@@ -83,6 +82,8 @@
 
   /* 过渡 */
   --transition-normal: 0.3s ease;
+  --transition-transform: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-shadow: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* z-index */
   --z-index-header: 1000;
@@ -92,4 +93,39 @@
   --wechat-color: #07c160;
   --zhihu-color: #0084ff;
   --tiktok-color: #000000;
+
+  /* 添加新的颜色变量 */
+  --color-primary-light: rgba(26, 115, 232, 0.1);
+  --color-primary-dark: #1557b0;
+
+  /* 添加 RGB 颜色值，用于透明度计算 */
+  --color-primary-rgb: 66, 133, 244;  /* 对应 #4285f4 */
+  --color-blue-rgb: 26, 115, 232;     /* 对应 #1a73e8 */
+  --color-green-rgb: 52, 168, 83;     /* 对应 #34a853 */
+  --color-yellow-rgb: 251, 188, 4;    /* 对应 #fbbc04 */
+  --color-red-rgb: 234, 67, 53;       /* 对应 #ea4335 */
+
+  /* 添加新的过渡曲线 */
+  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 添加新的阴影变量 */
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05);
+  
+  /* 添加新的间距变量 */
+  --card-padding-desktop: var(--spacing-2xl);
+  --card-padding-mobile: var(--spacing-xl);
+  
+  /* 添加新的尺寸变量 */
+  --icon-size-lg: 64px;
+  --icon-size-md: 56px;
+  --icon-font-size-lg: 32px;
+  --icon-font-size-md: 28px;
+  --icon-size-sm: 48px;
+  --icon-font-size-sm: 24px;
+  
+  /* 添加新的边框变量 */
+  --border-width-indicator: 3px;
+  --border-width-hover: 2px;
 } 

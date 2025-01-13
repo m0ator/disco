@@ -1,95 +1,50 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Icon } from '../Icon/Icon';
+import React, { useState } from 'react';
+import Icon from '../Icon/Icon';
 import './SearchBar.css';
 
-export const SearchBar = ({
-  placeholder = '搜索',
-  suggestions = [],
-  onSearch,
-  onSuggestionClick,
-  className = ''
-}) => {
-  const [query, setQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const searchRef = useRef(null);
+const SearchBar = ({ placeholder = '搜索...', onSearch }) => {
+  const [value, setValue] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (query.trim()) {
-      onSearch?.(query);
+    if (value.trim()) {
+      onSearch(value);
     }
   };
 
-  const handleFocus = () => {
-    setIsFocused(true);
-    setShowSuggestions(true);
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
   };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    // 延迟隐藏建议列表，以便可以点击
-    setTimeout(() => setShowSuggestions(false), 200);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
-    <div 
-      ref={searchRef}
-      className={`search-container ${isFocused ? 'focused' : ''} ${className}`}
-    >
-      <form onSubmit={handleSubmit} className="search-form">
-        <Icon name="search" className="search-icon" />
-        <input
-          type="text"
-          className="search-input"
-          placeholder={placeholder}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {query && (
-          <button 
-            type="button" 
-            className="search-clear"
-            onClick={() => setQuery('')}
-          >
-            <Icon name="close" />
-          </button>
-        )}
-        <button type="submit" className="search-submit">
-          搜索
-        </button>
-      </form>
-
-      {showSuggestions && suggestions.length > 0 && (
-        <div className="search-suggestions">
-          {suggestions.map((suggestion, index) => (
+    <div className="search-bar-container">
+      <form className="search-bar" onSubmit={handleSubmit}>
+        <div className="search-input-wrapper">
+          <Icon name="search" className="search-icon" />
+          <input
+            type="text"
+            className="search-input"
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          {value && (
             <button
-              key={index}
-              className="suggestion-item"
-              onClick={() => {
-                setQuery(suggestion);
-                onSuggestionClick?.(suggestion);
-              }}
+              type="button"
+              className="clear-button"
+              onClick={() => setValue('')}
+              aria-label="清除搜索"
             >
-              <Icon name="search" className="suggestion-icon" />
-              <span>{suggestion}</span>
+              <Icon name="close" />
             </button>
-          ))}
+          )}
         </div>
-      )}
+      </form>
     </div>
   );
-}; 
+};
+
+export default SearchBar; 

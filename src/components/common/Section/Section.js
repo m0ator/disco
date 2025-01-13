@@ -1,11 +1,13 @@
 import React from 'react';
 import './Section.css';
 
-const Section = ({ children, className, background }) => {
-  const sectionClass = `section ${className || ''} ${background ? `bg-${background}` : ''}`;
-  
+export const Section = ({ id, className, children, ...props }) => {
   return (
-    <section className={sectionClass}>
+    <section 
+      id={id}
+      className={`section ${className || ''}`}
+      {...props}
+    >
       {children}
     </section>
   );

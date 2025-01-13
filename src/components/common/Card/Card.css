@@ -1,217 +1,73 @@
 .card {
-  background: var(--background-white);
+  background: var(--color-white);
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all var(--transition-normal);
-}
-
-/* Variants */
-.card-default {
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card-default:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.card-outlined {
-  border: 1px solid var(--border-color);
-}
-
-/* Hover Effects */
 .card-hover:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
-/* Interactive */
-.card-interactive {
-  cursor: pointer;
+.card-content {
+  padding: var(--spacing-lg);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
 }
 
-.card-interactive:active {
-  transform: translateY(1px);
+.card-hover:hover .card-content {
+  transform: translateY(-4px);
 }
 
-/* Media */
 .card-media {
   position: relative;
-  width: 100%;
-  padding-top: calc(100% / (var(--aspect-ratio)));
+  overflow: hidden;
 }
 
 .card-media img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-/* Content */
-.card-content {
-  padding: var(--spacing-lg);
+.card-hover:hover .card-media img {
+  transform: scale(1.05);
 }
 
-/* Actions */
 .card-actions {
-  display: flex;
-  align-items: center;
   padding: var(--spacing-md) var(--spacing-lg);
-  border-top: 1px solid var(--border-color);
-}
-
-/* Feature Card 样式 */
-.card-feature {
-  padding: var(--spacing-xl);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.feature-link {
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-}
-
-.feature-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  background: var(--background-light);
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--primary-color);
-  font-size: 24px;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  border-top: 1px solid var(--color-border);
 }
 
-.feature-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-primary);
-  margin: 0 0 var(--spacing-sm);
-}
-
-.feature-description {
-  font-size: var(--font-size-base);
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.6;
-}
-
-.feature-arrow {
-  margin-left: auto;
-  color: var(--text-secondary);
-  transition: transform var(--transition-normal);
-}
-
-.card-feature:hover .feature-arrow {
-  transform: translateX(4px);
-  color: var(--primary-color);
-}
-
-/* Stat Card 样式 */
-.card-stat {
-  padding: var(--spacing-xl);
-  text-align: center;
-}
-
-.stat-value {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-xs);
-}
-
-.stat-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-md);
-}
-
-.stat-trend {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-sm);
-}
-
-.stat-trend.positive {
-  background: var(--success-light);
-  color: var(--success-dark);
-}
-
-.stat-trend.negative {
-  background: var(--error-light);
-  color: var(--error-dark);
-}
-
-/* Testimonial Card 样式 */
-.card-testimonial {
-  padding: var(--spacing-xl);
-}
-
-.testimonial-quote {
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-xl);
-  font-style: italic;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.testimonial-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.testimonial-name {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-primary);
-}
-
-.testimonial-role {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-/* Responsive */
 @media (max-width: 768px) {
   .card-content {
     padding: var(--spacing-md);
   }
-  
+
   .card-actions {
     padding: var(--spacing-sm) var(--spacing-md);
   }
+}
 
-  .card-feature {
-    padding: var(--spacing-lg);
-  }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-  .feature-title {
-    font-size: var(--font-size-lg);
-  }
-
-  .stat-value {
-    font-size: var(--font-size-2xl);
-  }
-
-  .testimonial-quote {
-    font-size: var(--font-size-base);
-  }
+.card-hover:hover::before {
+  opacity: 1;
 } 

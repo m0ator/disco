@@ -35,4 +35,21 @@ img {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* 添加平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 确保 section 有足够的上边距以防止被 header 遮挡 */
+section[id] {
+  scroll-margin-top: var(--header-height);
+}
+
+/* 优化响应式布局 */
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: calc(var(--header-height) - 10px);
+  }
 } 

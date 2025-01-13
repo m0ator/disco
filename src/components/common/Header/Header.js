@@ -21,9 +21,10 @@ const Header = () => {
       label: '诚信',
       path: '/integrity',
       children: [
-        { label: '诚信理念', path: '/integrity/concept' },
-        { label: '诚信实践', path: '/integrity/practice' },
-        { label: '诚信承诺', path: '/integrity/commitment' }
+        { label: '我们的原则', path: '/integrity#principles' },
+        { label: '诚信发展', path: '/integrity#timeline' },
+        { label: '我们的承诺', path: '/integrity#commitments' },
+        { label: '透明度报告', path: '/integrity#reports' }
       ]
     },
     {
@@ -47,11 +48,6 @@ const Header = () => {
     {
       label: '故事',
       path: '/stories',
-      children: [
-        { label: '客户案例', path: '/stories/cases' },
-        { label: '新闻动态', path: '/stories/news' },
-        { label: '行业洞察', path: '/stories/insights' }
-      ]
     }
   ];
 
@@ -67,27 +63,17 @@ const Header = () => {
     setActiveDropdown(null);
   }, [location.pathname]);
 
-  const handleNavClick = (path, hash) => {
-    setIsMenuOpen(false);
-    setActiveDropdown(null);
+  const handleNavClick = (path) => {
+    const [basePath, hash] = path.split('#');
     if (hash) {
-      navigate(path);
       setTimeout(() => {
-        const element = document.querySelector(hash);
+        const element = document.querySelector(`#${hash}`);
         if (element) {
-          const headerOffset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 100);
-    } else {
-      navigate(path);
     }
+    setIsMenuOpen(false);
   };
 
   const handleMouseEnter = (index) => {
@@ -148,12 +134,6 @@ const Header = () => {
           </nav>
 
           <div className="header-actions">
-            <button className="action-button">
-              <Icon name="search" />
-            </button>
-            <button className="action-button">
-              <Icon name="language" />
-            </button>
             <button 
               className="contact-button"
               onClick={() => setIsContactModalOpen(true)}

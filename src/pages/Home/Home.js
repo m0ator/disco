@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import { 
   Section,
   Container,
@@ -12,7 +10,11 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Progress
+  Progress,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanel
 } from '../../components/common';
 import { Carousel } from '../../components/common/Carousel';
 import './Home.css';
@@ -69,6 +71,28 @@ const Home = () => {
           '数据迁移服务',
           '存储优化方案',
           '容灾保护体系'
+        ]
+      },
+      {
+        title: '订阅式IT服务',
+        description: '轻量级计次年包/季包产品，包含IT咨询，远程服务，上门服务及驻场巡检，服务内容涵盖多品牌IT设备。',
+        icon: 'subscriptions',
+        features: [
+          '多品牌IT设备',
+          '日常桌面级运维',
+          '网络调试与优化',
+          '电脑系统应用'
+        ]
+      },
+      {
+        title: 'IT通用解决方案',
+        description: '联想百应IT通用解决方案服务包括IT咨询/运维/外包、数据中心建设、办公网络建设，帮助企业解决 IT 困扰，提升运营效率，实现数字化转型',
+        icon: 'integration_instructions',
+        features: [
+          'IT咨询与外包服务',
+          '数据中心建设',
+          '办公网络规划',
+          '数据防灾方案'
         ]
       }
     ],
@@ -271,13 +295,13 @@ const Home = () => {
         <Container>
           <Motion className="hero-content">
             <h1 className="hero-title animate">
-              我们的使命是<span className="highlight">整合</span>全球<span className="highlight">信息</span>，
+            我们的服务，<span className="highlight">致力于</span>尽可能提升<span className="highlight">更多人的</span>
               <br />
-              供大众使用，<span className="highlight">让人人受益</span>。
+              <span className="highlight">办公效率及安全</span>
             </h1>
             <div className="hero-image animate">
               <img src="https://www.microswift.top/halo/12/xfwvhmuw.jpg" alt="Bill Guffey 如何利用 Google 街景寻找创作灵感" />
-              <p className="image-caption">Bill Guffey 如何利用 Google 街景寻找创作灵感</p>
+              <p className="image-caption">致力于尽可能提升更多人的办公效率及安全</p>
             </div>
           </Motion>
         </Container>

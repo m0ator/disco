@@ -10,11 +10,13 @@ const About = () => {
       <section id="mission" className="hero-section">
         <div className="container">
           <h1 className="hero-title">
-            我们的使命是<br />
-            整合与发布信息，让人人都能获取和使用
+            我们的<span className="highlight-yellow">使命是</span><br />通过
+            <span className="highlight-blue">优质的</span>服务，
+            服务<span className="highlight-green">大众</span>，
+            <span className="highlight-red">让人人受益</span>
           </h1>
           <p className="hero-subtitle">
-            从创立之初到现在，我们始终致力于改善人们获取服务的方式
+            从之初到现在，我们始终致力于改善人们享受服务的方式
           </p>
         </div>
       </section>
@@ -97,39 +99,44 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section id="team" className="team-section">
+      {/* Culture Section */}
+      <section className="culture-section">
         <div className="container">
-          <h2 className="section-title">WE TEAM</h2>
-          <div className="team-grid">
+          <h2 className="section-title">企业文化</h2>
+          <div className="culture-grid">
             {[
               {
-                image: '/images/team/ceo.jpg',
-                name: '祁虹安',
-                title: 'CEO',
-                description: '拥有7年科技行业经验，致力于推动公司创新发展。'
+                icon: 'psychology',
+                title: '创新思维',
+                description: '我们鼓励创新思维，不断探索新的可能性，推动技术和服务的进步。',
+                color: 'blue'
               },
               {
-                image: '/images/team/cto.jpg',
-                name: '李纨',
-                title: '技术官',
-                description: '技术专家，负责公司技术战略和产品研发。'
+                icon: 'diversity_3',
+                title: '团队协作',
+                description: '我们重视团队合作，相信通过协作能够创造更大的价值。',
+                color: 'green'
               },
               {
-                image: '/images/team/cfo.jpg',
-                name: '京墨',
-                title: '安全专家',
-                description: '安全专家，负责公司安全策略和风险管理。'
+                icon: 'workspace_premium',
+                title: '追求卓越',
+                description: '我们始终追求卓越，为客户提供最优质的服务和解决方案。',
+                color: 'yellow'
+              },
+              {
+                icon: 'volunteer_activism',
+                title: '责任担当',
+                description: '我们勇于承担社会责任，致力于为社会创造积极的影响。',
+                color: 'red'
               }
-            ].map((member, index) => (
-              <div key={index} className="team-card">
-                <div className="member-image">
-                  <img src={member.image} alt={member.name} />
+            ].map((culture, index) => (
+              <div key={index} className={`culture-card culture-${culture.color}`}>
+                <div className="culture-icon">
+                  <Icon name={culture.icon} />
                 </div>
-                <div className="member-info">
-                  <h3 className="member-name">{member.name}</h3>
-                  <p className="member-title">{member.title}</p>
-                  <p className="member-description">{member.description}</p>
+                <div className="culture-content">
+                  <h3 className="culture-title">{culture.title}</h3>
+                  <p className="culture-description">{culture.description}</p>
                 </div>
               </div>
             ))}

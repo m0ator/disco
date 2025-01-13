@@ -17,6 +17,22 @@
   margin-bottom: var(--spacing-lg);
 }
 
+.hero-title .highlight-yellow {
+  color: var(--google-yellow);
+}
+
+.hero-title .highlight-blue {
+  color: var(--google-blue);
+}
+
+.hero-title .highlight-green {
+  color: var(--google-green);
+}
+
+.hero-title .highlight-red {
+  color: var(--google-red);
+}
+
 .hero-subtitle {
   font-size: var(--font-size-xl);
   opacity: 0.9;
@@ -28,7 +44,27 @@
 /* Values Section */
 .values-section {
   padding: var(--spacing-4xl) 0;
-  background: var(--background-light);
+  background: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 添加背景装饰 */
+.values-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(var(--google-blue-rgb), 0.03),
+    transparent 50%
+  ), radial-gradient(
+    circle at bottom left,
+    rgba(var(--google-green-rgb), 0.03),
+    transparent 50%
+  );
+  opacity: 0.8;
+  z-index: 0;
 }
 
 .section-title {
@@ -40,43 +76,184 @@
 .values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
+  gap: var(--spacing-2xl);
+  position: relative;
+  z-index: 1;
 }
 
 .value-card {
-  background: var(--background-white);
-  padding: var(--spacing-xl);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--google-blue-rgb), 0.02) 0%,
+    rgba(var(--google-green-rgb), 0.02) 50%,
+    rgba(var(--google-yellow-rgb), 0.02) 100%
+  );
+  padding: var(--card-padding-desktop);
   border-radius: var(--radius-lg);
-  text-align: center;
-  transition: all var(--transition-normal);
+  border: none;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
 }
 
-.value-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.value-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto var(--spacing-lg);
-  background: var(--primary-light);
+/* 卡片装饰效果 */
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle at 100% 0%,
+    rgba(var(--google-blue-rgb), 0.08) 0%,
+    rgba(var(--google-blue-rgb), 0.02) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: all 0.4s ease;
+  transform: translate(30%, -30%) scale(0.8);
   border-radius: 50%;
+}
+
+.value-card:hover::before {
+  opacity: 1;
+  transform: translate(20%, -20%) scale(1);
+}
+
+/* 图标样式 */
+.value-icon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-color);
-  font-size: 32px;
+  font-size: var(--icon-font-size-lg);
+  background: rgba(var(--google-blue-rgb), 0.1);
+  color: var(--google-blue);
+  margin-bottom: var(--spacing-xl);
+  transition: var(--transition-bounce);
+  position: relative;
 }
 
+/* 图标装饰效果 */
+.value-icon::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 2px dashed var(--google-blue);
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.8) rotate(-8deg);
+  transition: var(--transition-bounce);
+}
+
+.value-icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--google-blue-rgb), 0.1),
+    rgba(var(--google-blue-rgb), 0.05)
+  );
+  opacity: 0;
+  transform: scale(0.9);
+  transition: var(--transition-bounce);
+}
+
+/* 悬停效果 */
+.value-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--google-blue-rgb), 0.05) 0%,
+    rgba(var(--google-green-rgb), 0.05) 50%,
+    rgba(var(--google-yellow-rgb), 0.05) 100%
+  );
+}
+
+.value-card:hover .value-icon {
+  transform: scale(1.1) rotate(8deg);
+  background: var(--google-blue);
+  color: var(--color-white);
+}
+
+.value-card:hover .value-icon::before {
+  opacity: 0.2;
+  transform: scale(1.2) rotate(8deg);
+}
+
+.value-card:hover .value-icon::after {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 标题样式 */
 .value-title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
   margin-bottom: var(--spacing-md);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.value-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--google-blue);
+  opacity: 0.2;
+  transition: var(--transition-smooth);
+}
+
+.value-card:hover .value-title::after {
+  width: 60px;
+  opacity: 1;
 }
 
 .value-description {
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
+  transition: var(--transition-smooth);
+}
+
+.value-card:hover .value-description {
+  color: var(--text-primary);
+}
+
+/* 添加装饰性边框 */
+.value-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(135deg, 
+    var(--google-blue) 0%,
+    var(--google-green) 50%,
+    var(--google-yellow) 100%
+  ) border-box;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.value-card:hover::after {
+  opacity: 0.3;
 }
 
 /* History Section */
@@ -128,11 +305,20 @@
 }
 
 .timeline-content {
-  background: var(--background-white);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--google-blue-rgb), 0.02) 0%,
+    rgba(var(--google-green-rgb), 0.02) 50%,
+    rgba(var(--google-yellow-rgb), 0.02) 100%
+  );
   padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   direction: ltr;
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  border: none;
 }
 
 .timeline-title {
@@ -144,59 +330,41 @@
   color: var(--text-secondary);
 }
 
-/* Team Section */
-.team-section {
-  padding: var(--spacing-4xl) 0;
-  background: var(--background-light);
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
-}
-
-.team-card {
-  background: var(--background-white);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all var(--transition-normal);
-}
-
-.team-card:hover {
+/* 悬停效果 */
+.timeline-content:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--google-blue-rgb), 0.05) 0%,
+    rgba(var(--google-green-rgb), 0.05) 50%,
+    rgba(var(--google-yellow-rgb), 0.05) 100%
+  );
 }
 
-.member-image {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
+/* 添加装饰性边框 */
+.timeline-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(135deg, 
+    var(--google-blue) 0%,
+    var(--google-green) 50%,
+    var(--google-yellow) 100%
+  ) border-box;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: var(--transition-smooth);
 }
 
-.member-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.member-info {
-  padding: var(--spacing-lg);
-}
-
-.member-name {
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-xs);
-}
-
-.member-title {
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-md);
-}
-
-.member-description {
-  color: var(--text-secondary);
-  line-height: 1.6;
+.timeline-content:hover::after {
+  opacity: 0.3;
 }
 
 /* CTA Section */
@@ -263,5 +431,296 @@
 
   .timeline-item:nth-child(even) .timeline-year {
     text-align: left;
+  }
+
+  .value-card {
+    padding: var(--card-padding-mobile);
+  }
+
+  .value-icon {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+    font-size: var(--icon-font-size-md);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+/* Culture Section */
+.culture-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 调整标题和卡片网格之间的间距 */
+.culture-section .section-title {
+  margin-bottom: var(--spacing-2xl);  /* 减小标题和卡片之间的间距 */
+}
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-xl);  /* 减小卡片之间的间距 */
+  position: relative;
+  z-index: 1;
+  margin-top: var(--spacing-xl);  /* 添加顶部间距 */
+}
+
+.culture-card {
+  padding: var(--card-padding-desktop);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xl);
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  box-shadow: var(--shadow-card);
+}
+
+/* 为每个卡片添加装饰性背景 */
+.culture-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  opacity: 0.1;
+  transition: all 0.4s ease;
+  transform: translate(30%, -30%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.culture-blue::before {
+  background: radial-gradient(
+    circle at 100% 0%,
+    var(--google-blue) 0%,
+    transparent 70%
+  );
+}
+
+.culture-green::before {
+  background: radial-gradient(
+    circle at 100% 0%,
+    var(--google-green) 0%,
+    transparent 70%
+  );
+}
+
+.culture-yellow::before {
+  background: radial-gradient(
+    circle at 100% 0%,
+    var(--google-yellow) 0%,
+    transparent 70%
+  );
+}
+
+.culture-red::before {
+  background: radial-gradient(
+    circle at 100% 0%,
+    var(--google-red) 0%,
+    transparent 70%
+  );
+}
+
+/* 卡片悬停效果 */
+.culture-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.culture-card:hover::before {
+  transform: translate(20%, -20%) scale(1.2);
+  opacity: 0.15;
+}
+
+/* 图标容器样式 */
+.culture-icon {
+  flex-shrink: 0;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--icon-font-size-lg);
+  transition: var(--transition-bounce);
+  position: relative;
+  z-index: 1;
+}
+
+/* 图标装饰效果 */
+.culture-icon::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  opacity: 0;
+  transition: var(--transition-bounce);
+}
+
+.culture-icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: var(--transition-bounce);
+}
+
+/* 为每个图标设置不同的样式 */
+.culture-blue .culture-icon {
+  background: rgba(var(--google-blue-rgb), 0.1);
+  color: var(--google-blue);
+}
+
+.culture-blue .culture-icon::before {
+  border: 2px dashed var(--google-blue);
+}
+
+.culture-blue .culture-icon::after {
+  background: linear-gradient(135deg, var(--google-blue), rgba(var(--google-blue-rgb), 0.5));
+}
+
+/* 重复类似的样式为其他颜色 */
+.culture-green .culture-icon {
+  background: rgba(var(--google-green-rgb), 0.1);
+  color: var(--google-green);
+}
+
+.culture-green .culture-icon::before {
+  border: 2px dashed var(--google-green);
+}
+
+.culture-green .culture-icon::after {
+  background: linear-gradient(135deg, var(--google-green), rgba(var(--google-green-rgb), 0.5));
+}
+
+.culture-yellow .culture-icon {
+  background: rgba(var(--google-yellow-rgb), 0.1);
+  color: var(--google-yellow);
+}
+
+.culture-yellow .culture-icon::before {
+  border: 2px dashed var(--google-yellow);
+}
+
+.culture-yellow .culture-icon::after {
+  background: linear-gradient(135deg, var(--google-yellow), rgba(var(--google-yellow-rgb), 0.5));
+}
+
+.culture-red .culture-icon {
+  background: rgba(var(--google-red-rgb), 0.1);
+  color: var(--google-red);
+}
+
+.culture-red .culture-icon::before {
+  border: 2px dashed var(--google-red);
+}
+
+.culture-red .culture-icon::after {
+  background: linear-gradient(135deg, var(--google-red), rgba(var(--google-red-rgb), 0.5));
+}
+
+/* 悬停时图标效果 */
+.culture-card:hover .culture-icon {
+  transform: scale(1.1) rotate(10deg);
+  color: white;
+}
+
+.culture-card:hover .culture-icon::before {
+  opacity: 0.2;
+  transform: scale(1.2) rotate(8deg);
+}
+
+.culture-card:hover .culture-icon::after {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.culture-blue:hover .culture-icon { background: var(--google-blue); }
+.culture-green:hover .culture-icon { background: var(--google-green); }
+.culture-yellow:hover .culture-icon { background: var(--google-yellow); }
+.culture-red:hover .culture-icon { background: var(--google-red); }
+
+/* 文本内容样式 */
+.culture-content {
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.culture-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  padding-bottom: var(--spacing-xs);
+}
+
+.culture-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  opacity: 0.3;
+  transition: var(--transition-smooth);
+}
+
+.culture-blue .culture-title::after { background: var(--google-blue); }
+.culture-green .culture-title::after { background: var(--google-green); }
+.culture-yellow .culture-title::after { background: var(--google-yellow); }
+.culture-red .culture-title::after { background: var(--google-red); }
+
+.culture-card:hover .culture-title::after {
+  width: 60px;
+  opacity: 1;
+}
+
+.culture-blue .culture-title { color: var(--google-blue); }
+.culture-green .culture-title { color: var(--google-green); }
+.culture-yellow .culture-title { color: var(--google-yellow); }
+.culture-red .culture-title { color: var(--google-red); }
+
+.culture-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  transition: var(--transition-smooth);
+}
+
+.culture-card:hover .culture-description {
+  color: var(--text-primary);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .culture-section {
+    padding: var(--spacing-3xl) 0;  /* 移动端减小上下内边距 */
+  }
+
+  .culture-section .section-title {
+    margin-bottom: var(--spacing-xl);  /* 移动端进一步减小标题和卡片间距 */
+  }
+
+  .culture-grid {
+    gap: var(--spacing-lg);  /* 移动端减小卡片之间的间距 */
+    margin-top: var(--spacing-lg);  /* 移动端减小顶部间距 */
+  }
+
+  .culture-card {
+    padding: var(--card-padding-mobile);
+  }
+
+  .culture-icon {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+    font-size: var(--icon-font-size-md);
   }
 } 

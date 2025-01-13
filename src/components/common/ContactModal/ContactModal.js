@@ -24,6 +24,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 <div className="contact-text">
                   <h3>公司名称</h3>
                   <p>微讯云信息</p>
+                  <p>甘肃省微讯云信息技术服务有限责任公司</p>
                 </div>
               </div>
               <div className="contact-item">

@@ -1,46 +1,29 @@
 import React from 'react';
-import { Icon } from '../Icon/Icon';
+import classNames from '../classnames';
 import './Result.css';
 
 export const Result = ({
-  status = 'info',
+  icon,
   title,
   subTitle,
-  icon,
   extra,
-  children,
-  className = ''
+  status = 'info',
+  className,
+  ...props
 }) => {
-  const getIcon = () => {
-    if (icon) return icon;
-    
-    switch (status) {
-      case 'success':
-        return <Icon name="check_circle" />;
-      case 'error':
-        return <Icon name="error" />;
-      case 'warning':
-        return <Icon name="warning" />;
-      case 'info':
-        return <Icon name="info" />;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className={`result result-${status} ${className}`}>
-      <div className="result-icon">
-        {getIcon()}
-      </div>
-
-      <div className="result-content">
-        {title && <div className="result-title">{title}</div>}
-        {subTitle && <div className="result-subtitle">{subTitle}</div>}
-        {children && <div className="result-extra">{children}</div>}
-      </div>
-
-      {extra && <div className="result-actions">{extra}</div>}
+    <div 
+      className={classNames(
+        'result',
+        `result-${status}`,
+        className
+      )} 
+      {...props}
+    >
+      {icon && <div className="result-icon">{icon}</div>}
+      {title && <div className="result-title">{title}</div>}
+      {subTitle && <div className="result-subtitle">{subTitle}</div>}
+      {extra && <div className="result-extra">{extra}</div>}
     </div>
   );
 };
