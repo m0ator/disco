@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/common/Header/Header';
 import Footer from './components/common/Footer/Footer';
+import ScrollToTop from './components/common/ScrollToTop/ScrollToTop';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Products from './pages/Products/Products';
@@ -25,6 +26,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

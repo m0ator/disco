@@ -147,23 +147,59 @@
 .feature-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  justify-content: center;
   padding: var(--spacing-md);
   border-radius: var(--radius-lg);
   background: rgba(var(--google-blue-rgb), 0.03);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  border: 1px solid transparent;
+  min-height: 48px;
 }
 
 .feature-item:hover {
   background: rgba(var(--google-blue-rgb), 0.08);
-  transform: translateX(4px);
+  transform: translateY(-2px);
+  border-color: rgba(var(--google-blue-rgb), 0.2);
+  box-shadow: 0 4px 12px rgba(var(--google-blue-rgb), 0.1);
 }
 
-.feature-item i {
-  color: var(--google-green);
-  font-size: var(--icon-font-size-lg);
+.feature-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(var(--google-blue-rgb), 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.feature-item:hover::after {
+  transform: translateX(100%);
+}
+
+.feature-item span {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-item:hover span {
+  color: var(--google-blue);
 }
 
 .service-price {
@@ -251,20 +287,28 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(var(--google-blue-rgb), 0.1),
-    transparent
-  );
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  border-radius: var(--radius-lg);
+  animation: none;
+  z-index: 0;
 }
 
 .feature-item:hover::before {
-  transform: translateX(100%);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--google-blue-rgb), 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(var(--google-blue-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--google-blue-rgb), 0);
+  }
 }
 
 /* 添加动画关键帧 */
@@ -279,9 +323,20 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 为每个特性项添加交错动画 */
 .feature-item {
-  animation: slideIn 0.5s ease forwards;
+  animation: fadeInUp 0.5s ease forwards;
   opacity: 0;
 }
 

@@ -8,7 +8,7 @@ export { default as Container } from './Container/Container';
 export { default as Header } from './Header/Header';
 export { default as Footer } from './Footer/Footer';
 export { Menu, MenuItem, SubMenu } from './Menu/Menu';
-export { Tabs, TabList, Tab, TabPanel } from './Tabs/Tabs';
+export { default as Tabs, Tab, TabList, TabPanel } from './Tabs/Tabs';
 
 // 布局组件
 export { default as Grid } from './Grid/Grid';

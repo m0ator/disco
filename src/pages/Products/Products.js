@@ -5,7 +5,7 @@ import Button from '../../components/common/Button/Button';
 import ContactModal from '../../components/common/ContactModal/ContactModal';
 import ServiceTabs from '../../components/common/ServiceTabs/ServiceTabs';
 import CaseStudies from '../../components/common/CaseStudies/CaseStudies';
-import CoreAdvantages from '../../components/common/CoreAdvantages/CoreAdvantages';
+import AdvantagesTabs from '../../components/common/AdvantagesTabs/AdvantagesTabs';
 import './Products.css';
 
 const Products = () => {
@@ -78,8 +78,8 @@ const Products = () => {
         '电源模组升级',
         '机箱改装服务'
       ],
-      price: '￥299起',
-      time: '1-3小时'
+      price: '￥79起',
+      time: '0.3-3小时'
     },
     {
       icon: 'terminal',
@@ -93,7 +93,7 @@ const Products = () => {
         '系统安全加固',
         '性能监控部署'
       ],
-      price: '￥199起',
+      price: '￥80',
       time: '1-2小时'
     },
     {
@@ -108,7 +108,7 @@ const Products = () => {
         '病毒木马清除',
         '性能问题诊断'
       ],
-      price: '￥199起',
+      price: '￥40起',
       time: '1-4小时'
     },
     {
@@ -123,7 +123,7 @@ const Products = () => {
         '跑分性能测试',
         '保修质保服务'
       ],
-      price: '￥299起',
+      price: '￥99起',
       time: '2-4小时'
     },
     {
@@ -138,7 +138,7 @@ const Products = () => {
         '定期保养维护',
         '上门服务支持'
       ],
-      price: '￥499起/年',
+      price: '￥399起/年',
       time: '全年服务'
     },
     {
@@ -153,8 +153,8 @@ const Products = () => {
         '接口清洁保养',
         '导热硅脂更换'
       ],
-      price: '￥159起',
-      time: '1-2小时'
+      price: '￥40起',
+      time: '30分钟-1小时'
     },
     {
       icon: 'restore',
@@ -168,7 +168,7 @@ const Products = () => {
         '数据迁移服务',
         '远程技术支持'
       ],
-      price: '￥199起',
+      price: '￥80起',
       time: '2-3小时'
     },
     {
@@ -183,7 +183,7 @@ const Products = () => {
         '固态硬盘恢复',
         'RAID数据恢复'
       ],
-      price: '￥599起',
+      price: '￥699起',
       time: '24-72小时'
     },
     {
@@ -389,7 +389,7 @@ const Products = () => {
         </div>
       </section>
 
-      <CoreAdvantages />
+      <AdvantagesTabs />
 
       <section className="case-section">
         <div className="container">

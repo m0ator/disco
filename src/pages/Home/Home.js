@@ -14,14 +14,19 @@ import {
   Tabs,
   TabList,
   Tab,
-  TabPanel
+  TabPanel,
+  ContactModal
 } from '../../components/common';
 import { Carousel } from '../../components/common/Carousel';
+import JobList from '../../components/common/JobList/JobList';
 import './Home.css';
+import './HomeTabs.css';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [activeServiceTab, setActiveServiceTab] = useState(0);
+  const [showJobs, setShowJobs] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const handleTabChange = (index) => {
     setActiveTab(index);
@@ -310,44 +315,41 @@ const Home = () => {
       {/* Solutions Section */}
       <Section className="solutions-tabs-section">
         <Container>
-          <Motion>
-            <h2 className="section-title animate">我们能做什么</h2>
-            <Tabs 
-              className="solutions-tabs animate" 
-              selectedIndex={activeTab} 
-              onSelect={handleTabChange}
-            >
-              <TabList>
-                {solutionTabs.map((tab, index) => (
-                  <Tab key={index}>{tab.title}</Tab>
-                ))}
-              </TabList>
-              
+          <h2 className="section-title">我们的解决方案</h2>
+          <Tabs selectedIndex={activeTab} onSelect={handleTabChange} className="home-tabs">
+            <TabList>
               {solutionTabs.map((tab, index) => (
-                <TabPanel key={index}>
-                  <Grid className="solutions-grid">
-                    {tab.data.map((item, idx) => (
-                      <Card key={idx} className="solution-item">
+                <Tab key={index}>{tab.title}</Tab>
+              ))}
+            </TabList>
+            
+            {solutionTabs.map((tab, index) => (
+              <TabPanel key={index}>
+                <Motion>
+                  <div className="solutions-grid">
+                    {tab.data.map((solution, solutionIndex) => (
+                      <Card key={solutionIndex} className="solution-item">
                         <div className="solution-icon">
-                          <Icon name={item.icon} />
+                          <Icon name={solution.icon} />
                         </div>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                        <div className="solution-features">
-                          {item.features.map((feature, fidx) => (
-                            <div key={fidx} className="feature-item">
-                              <Icon name="check_circle" />
-                              <span>{feature}</span>
-                            </div>
-                          ))}
-                        </div>
+                        <CardContent>
+                          <h3>{solution.title}</h3>
+                          <p>{solution.description}</p>
+                          <ul className="solution-features">
+                            {solution.features.map((feature, featureIndex) => (
+                              <li key={featureIndex} className="feature-item">
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
                       </Card>
                     ))}
-                  </Grid>
-                </TabPanel>
-              ))}
-            </Tabs>
-          </Motion>
+                  </div>
+                </Motion>
+              </TabPanel>
+            ))}
+          </Tabs>
         </Container>
       </Section>
 
@@ -565,21 +567,32 @@ const Home = () => {
               variant="primary" 
               size="large"
               icon={<Icon name="arrow_forward" />}
-              onClick={() => window.location.href = '/careers'}
+              onClick={() => setShowJobs(!showJobs)}
             >
-              查看机会
+              {showJobs ? '收起列表' : '查看机会'}
             </Button>
             <Button 
               variant="secondary" 
               size="large"
               icon={<Icon name="mail" />}
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => setShowContactModal(true)}
             >
               联系我们
             </Button>
           </div>
+          {showJobs && (
+            <div className="jobs-container">
+              <JobList />
+            </div>
+          )}
         </Container>
       </Section>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+      />
     </div>
   );
 };

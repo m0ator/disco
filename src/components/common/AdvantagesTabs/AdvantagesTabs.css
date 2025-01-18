@@ -1,0 +1,233 @@
+.advantages-tabs {
+  padding: var(--spacing-4xl) 0;
+  background: var(--color-white);
+}
+
+.advantages-tabs .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.advantages-tabs .section-title {
+  text-align: center;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-3xl);
+  position: relative;
+}
+
+.advantages-tabs .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--google-blue),
+    var(--google-green)
+  );
+  border-radius: 3px;
+}
+
+/* 顶部筛选标签 */
+.advantages-filter {
+  position: relative;
+  margin-bottom: var(--spacing-2xl);
+  padding-top: var(--spacing-lg);
+}
+
+.advantages-filter::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.advantages-filter-list {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-2xl);
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.advantages-filter-item {
+  position: relative;
+  cursor: pointer;
+  padding: var(--spacing-md) var(--spacing-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.advantages-filter-item:hover {
+  transform: translateY(-2px);
+}
+
+.advantages-filter-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--google-blue);
+  opacity: 0;
+  border-radius: var(--radius-lg);
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.advantages-filter-item:hover::before {
+  opacity: 0.05;
+}
+
+.advantages-filter-item::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--google-blue);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.advantages-filter-item.active::after {
+  transform: scaleX(1);
+}
+
+.advantages-filter-title {
+  position: relative;
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.advantages-filter-item.active .advantages-filter-title {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+  transform: scale(1.05);
+}
+
+/* 内容展示区域 */
+.advantages-content {
+  margin-top: var(--spacing-xl);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 200px;
+  position: relative;
+}
+
+.advantage-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.advantage-item {
+  background: transparent;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  animation: scaleIn 0.5s ease forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.advantage-item:hover {
+  border-color: var(--google-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(var(--google-blue-rgb), 0.1);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.advantage-item:nth-child(1) { animation-delay: 0.1s; }
+.advantage-item:nth-child(2) { animation-delay: 0.2s; }
+.advantage-item:nth-child(3) { animation-delay: 0.3s; }
+.advantage-item:nth-child(4) { animation-delay: 0.4s; }
+.advantage-item:nth-child(5) { animation-delay: 0.5s; }
+.advantage-item:nth-child(6) { animation-delay: 0.6s; }
+.advantage-item:nth-child(7) { animation-delay: 0.7s; }
+.advantage-item:nth-child(8) { animation-delay: 0.8s; }
+.advantage-item:nth-child(9) { animation-delay: 0.9s; }
+
+.item-text {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.advantage-item:hover .item-text {
+  color: var(--google-blue);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .advantages-tabs {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .advantages-tabs .container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .advantage-items {
+    gap: var(--spacing-sm);
+  }
+
+  .advantages-filter-list {
+    gap: var(--spacing-lg);
+  }
+
+  .advantages-filter-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .advantages-filter-title {
+    font-size: var(--font-size-base);
+  }
+} 

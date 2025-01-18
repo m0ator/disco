@@ -369,24 +369,90 @@
 
 /* CTA Section */
 .cta-section {
-  padding: var(--spacing-4xl) 0;
-  text-align: center;
-  background: var(--primary-gradient);
-  color: var(--text-white);
+  padding: 80px 0;
+  background: var(--background-light);
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-title {
-  font-size: var(--font-size-2xl);
-  margin-bottom: var(--spacing-md);
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+  color: #202124;
+  z-index: 1;
+  line-height: 1.3;
 }
 
 .cta-description {
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
-  margin-bottom: var(--spacing-xl);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1.5rem;
+  color: #5f6368;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-3xl);
+  line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  z-index: 1;
+  font-weight: 400;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.jobs-container {
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 60px 0;
+  }
+
+  .cta-title {
+    font-size: 2.5rem;
+  }
+
+  .cta-description {
+    font-size: 1.25rem;
+    padding: 0 20px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 20px;
+    gap: 12px;
+  }
 }
 
 /* 响应式设计 */

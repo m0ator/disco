@@ -1,9 +1,19 @@
-import React from 'react';
-import Icon from '../../components/common/Icon/Icon';
-import Button from '../../components/common/Button/Button';
+import React, { useState } from 'react';
+import { 
+  Section, 
+  Container, 
+  Motion,
+  Button,
+  Icon,
+  ContactModal
+} from '../../components/common';
+import JobList from '../../components/common/JobList/JobList';
 import './About.css';
 
 const About = () => {
+  const [showJobs, setShowJobs] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+
   return (
     <div className="about-page">
       {/* Hero Section */}
@@ -145,17 +155,45 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
-        <div className="container">
-          <h2 className="cta-title">加入我们，共创未来</h2>
-          <p className="cta-description">
-            我们正在寻找优秀的人才加入团队，一起实现改变世界的梦想
-          </p>
-          <Button variant="primary" size="large">
-            查看职位空缺
-          </Button>
-        </div>
-      </section>
+      <Section className="cta-section">
+        <Container>
+          <Motion>
+            <h2 className="cta-title animate">加入我们，共创未来</h2>
+            <p className="cta-description animate">
+              探索更多机会，与我们一起推动技术创新
+            </p>
+          </Motion>
+          <div className="cta-buttons">
+            <Button 
+              variant="primary" 
+              size="large"
+              icon={<Icon name="arrow_forward" />}
+              onClick={() => setShowJobs(!showJobs)}
+            >
+              {showJobs ? '收起列表' : '查看职位空缺'}
+            </Button>
+            <Button 
+              variant="secondary" 
+              size="large"
+              icon={<Icon name="mail" />}
+              onClick={() => setShowContactModal(true)}
+            >
+              联系我们
+            </Button>
+          </div>
+          {showJobs && (
+            <div className="jobs-container">
+              <JobList />
+            </div>
+          )}
+        </Container>
+      </Section>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+      />
     </div>
   );
 };

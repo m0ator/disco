@@ -45,7 +45,6 @@ const ServiceTabs = ({ items }) => {
           <div className="service-features">
             {items[activeTab].features.map((feature, index) => (
               <div key={index} className="feature-item">
-                <Icon name="check_circle" />
                 <span>{feature}</span>
               </div>
             ))}
